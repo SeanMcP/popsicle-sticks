@@ -15,7 +15,7 @@ ReactDOM.render(
         <Provider>
             <App>
                 <Switch>
-                    <Route path='/class' component={ClassContainer}/>
+                    <Route path='/class/:classId' component={ClassContainer}/>
                     <Route exact path='/' component={ClassListContainer}/>
                 </Switch>
             </App>
