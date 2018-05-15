@@ -5,9 +5,10 @@
 ## About
 
 ### Utilizing
-- React v. 16.3
-- React Context API (with custom Redux-like wrapper)
-- React-Router
+- ⚛️ React v. 16.3
+- 🔥 Firebase
+- 🗺 React-Router
 
 ### To-do
-- Resolve error between `consume` and `react-router-dom` or switch to Redux
+- User login
+- Firebase queries
