@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import firebase from '../firebase';
+import { setSections } from '../actions/sectionActions';
 
 class SectionListContainer extends Component {
     constructor(props) {
@@ -10,7 +11,6 @@ class SectionListContainer extends Component {
         this.state = {
             name: '',
             type: null,
-            sections: []
         };
     }
 
@@ -26,14 +26,13 @@ class SectionListContainer extends Component {
                     type: sections[section].type
                 });
             }
-            this.setState({
-                sections: newState
-            });
+            this.props.setSections(newState);
         });
     }
 
     render() {
-        return <div className="sectionListContainer">
+        return (
+            <div className="section-list-container">
                 Class list container
                 <div className="create">
                     <form onSubmit={this.handleCreate}>
@@ -59,6 +58,7 @@ class SectionListContainer extends Component {
                     {this.renderSections()}
                 </ul>
             </div>
+        )
     }
 
     handleCreate = (e) => {
@@ -77,7 +77,7 @@ class SectionListContainer extends Component {
     }
 
     renderSections = () => {
-        return this.state.sections.map((section, i) => (
+        return this.props.sectionList.map((section, i) => (
             <li>
                 <Link className={section.type} to={`/section/${section.id}`}>{section.name}</Link>
             </li>
@@ -87,8 +87,12 @@ class SectionListContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        sections: state.sections
+        sectionList: state.sections.list
     }
-}
+};
 
-export default connect(mapStateToProps, null)(SectionListContainer);
+const mapDispatchToProps = {
+    setSections
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SectionListContainer);
