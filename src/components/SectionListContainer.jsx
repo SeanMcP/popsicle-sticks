@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import firebase from '../firebase';
-import { setSections } from '../actions/sectionActions';
+import { addSection, getSections, setSections } from '../actions/sectionActions';
 
 class SectionListContainer extends Component {
     constructor(props) {
@@ -15,19 +14,7 @@ class SectionListContainer extends Component {
     }
 
     componentDidMount() {
-        const sectionRef = firebase.database().ref('sections');
-        sectionRef.on('value', (snapshot) => {
-            const sections = snapshot.val();
-            const newState = [];
-            for (const section in sections) {
-                newState.push({
-                    id: section,
-                    name: sections[section].name,
-                    type: sections[section].type
-                });
-            }
-            this.props.setSections(newState);
-        });
+        this.props.getSections();
     }
 
     render() {
@@ -61,27 +48,36 @@ class SectionListContainer extends Component {
         )
     }
 
-    handleCreate = (e) => {
+    handleCreate = e => {
         e.preventDefault();
-        const sectionsRef = firebase.database().ref('sections');
-        const section = {
-            name: this.state.name,
-            type: this.state.type
-        }
-        sectionsRef.push(section);
+        const { name, type } = this.state;
+        this.props.addSection(name, type, 'Lorem ipsum');
+        // TODO: Only clear on success
         this.setState({ name: '', type: null });
-    }
+    };
 
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     }
 
     renderSections = () => {
-        return this.props.sectionList.map((section, i) => (
-            <li>
-                <Link className={section.type} to={`/section/${section.id}`}>{section.name}</Link>
-            </li>
-        ));
+        const output = [];
+        for (const id in this.props.sectionList) {
+            const section = this.props.sectionList[id];
+            output.push(
+                <li key={output.length}>
+                    <Link className={section.type} to={`/section/${id}`}>
+                        {section.name}
+                    </Link>
+                </li>
+            );
+        }
+        return output;
+        // return this.props.sectionList.map((section, i) => (
+            // <li>
+            //     <Link className={section.type} to={`/section/${section.id}`}>{section.name}</Link>
+            // </li>
+        // ));
     }
 }
 
@@ -92,6 +88,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
+    addSection,
+    getSections,
     setSections
 };
 
