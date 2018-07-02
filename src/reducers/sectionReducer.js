@@ -1,11 +1,11 @@
-// sectionReducer.js
-import { SECTION_ACTIONS } from '../actions/sectionActions';
+// SectionReducer.js
+import { SECTION_ACTIONS } from '../actions/SectionActions';
 
 const initialState = {
-    list: []
+    list: {}
 };
 
-const sectionReducer = (state = initialState, action) => {
+const SectionReducer = (state = initialState, action) => {
     switch (action.type) {
         case SECTION_ACTIONS.SET_SECTIONS:
             return Object.assign({}, state, {
@@ -16,4 +16,4 @@ const sectionReducer = (state = initialState, action) => {
     }
 };
 
-export default sectionReducer;
+export default SectionReducer;

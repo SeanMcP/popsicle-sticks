@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import sectionReducer from './sectionReducer';
+import SectionReducer from './SectionReducer';
 
 const reducer = combineReducers({
-    sections: sectionReducer
+    sections: SectionReducer
 });
 
 export default reducer;

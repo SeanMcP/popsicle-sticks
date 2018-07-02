@@ -1,20 +1,28 @@
 // sectionActions.js
 import db from '../firebase';
+import { setNotification } from '../actions';
 
 export const SECTION_ACTIONS = {
     SET_SECTIONS: 'SET_SECTIONS'
 };
 
 export const addSection = (name, type, description) => {
-    return () => {
+    return (dispatch) => {
         db
             .collection('sections')
             .add({ name, type, description })
             .then(() => {
-                console.log('Document successfully written!');
+                dispatch(setNotification({
+                    type: 'SUCCESS',
+                    message: 'Section successfully added'
+                }));
             })
             .catch(error => {
-                console.error('Error writing document: ', error);
+                dispatch(setNotification({
+                    type: 'FAILURE',
+                    message: 'Section failed to add',
+                    error
+                }));
             });
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addSection, getSections, setSections } from '../actions/sectionActions';
+import { addSection, getSections, setSections } from '../actions';
 
 class SectionListContainer extends Component {
     constructor(props) {
