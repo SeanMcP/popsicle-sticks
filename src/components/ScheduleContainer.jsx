@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addSection, getSections, setSections } from '../actions';
+import { addSection, getSections } from '../actions';
 
-class SectionListContainer extends Component {
+class ScheduleContainer extends Component {
     constructor(props) {
         super(props);
 
@@ -19,21 +19,21 @@ class SectionListContainer extends Component {
 
     render() {
         return (
-            <div className="section-list-container">
+            <div className="schedule-container">
                 Class list container
                 <div className="create">
                     <form onSubmit={this.handleCreate}>
                         <input name="name" onChange={this.handleChange} placeholder="Section name" type="text" value={this.props.name} />
-                        <input id="sectionTypeElementary" name="type" onChange={this.handleChange} type="radio" value="elementary" />
-                        <label htmlFor="sectionTypeElementary">
+                        <input id="section-type-elementary" name="type" onChange={this.handleChange} type="radio" value="elementary" />
+                        <label htmlFor="section-type-elementary">
                             Elementary
                         </label>
-                        <input id="sectionTypeMiddle" name="type" onChange={this.handleChange} type="radio" value="middle" />
-                        <label htmlFor="sectionTypeMiddle">
+                        <input id="section-type-middle" name="type" onChange={this.handleChange} type="radio" value="middle" />
+                        <label htmlFor="section-type-middle">
                             Middle
                         </label>
-                        <input id="sectionTypeSecondary" name="type" onChange={this.handleChange} type="radio" value="secondary" />
-                        <label htmlFor="sectionTypeSecondary">
+                        <input id="section-type-secondary" name="type" onChange={this.handleChange} type="radio" value="secondary" />
+                        <label htmlFor="section-type-secondary">
                             Secondary
                         </label>
                         <button disabled={!this.state.name && !this.state.type}>
@@ -89,8 +89,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     addSection,
-    getSections,
-    setSections
+    getSections
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SectionListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ScheduleContainer);

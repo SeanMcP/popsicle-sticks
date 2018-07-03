@@ -34,14 +34,10 @@ export const getSections = () => {
             querySnapshot.forEach((doc) => {
                 output[doc.id] = doc.data();
             });
-            dispatch(setSections(output));
+            return dispatch({
+                type: SECTION_ACTIONS.SET_SECTIONS,
+                data: output
+            });
         });
     }
 }
-
-export const setSections = (data) => {
-    return {
-        data,
-        type: SECTION_ACTIONS.SET_SECTIONS
-    }
-};

@@ -11,7 +11,7 @@ import reducer from './reducers';
 
 import App from './components/App';
 import SectionContainer from './components/SectionContainer';
-import SectionListContainer from './components/SectionListContainer';
+import ScheduleContainer from './components/ScheduleContainer';
 
 import './styles/index.css';
 
@@ -24,7 +24,7 @@ ReactDOM.render(
             <App>
                 <Switch>
                     <Route path='/section/:sectionId' component={SectionContainer}/>
-                    <Route exact path='/' component={SectionListContainer}/>
+                    <Route exact path='/' component={ScheduleContainer}/>
                 </Switch>
             </App>
         </Provider>
