@@ -77,7 +77,7 @@ class SectionContainer extends Component {
         for (const id in students) {
             const student = students[id];
             output.push(
-                <li key={id}>{student.name} - {student.gender} - {student.sections[sectionId]} - <Link to={`/student/${id}`}>Edit</Link></li>
+                <li key={id}>{student.name} - {student.gender} - {student.sections[sectionId]} - <Link to={`/student/${id}`}>View student</Link></li>
             );
         }
         return output;

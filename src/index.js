@@ -10,8 +10,9 @@ import reduxThunk from 'redux-thunk';
 import reducer from './reducers';
 
 import App from './components/App';
-import SectionContainer from './components/SectionContainer';
-import ScheduleContainer from './components/ScheduleContainer';
+import SectionContainer from './containers/SectionContainer';
+import ScheduleContainer from './containers/ScheduleContainer';
+import StudentContainer from './containers/StudentContainer';
 
 import './styles/index.css';
 
@@ -24,6 +25,7 @@ ReactDOM.render(
             <App>
                 <Switch>
                     <Route path='/section/:sectionId' component={SectionContainer}/>
+                    <Route path='/student/:studentId' component={StudentContainer}/>
                     <Route exact path='/' component={ScheduleContainer}/>
                 </Switch>
             </App>
