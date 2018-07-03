@@ -11,10 +11,9 @@ class SectionContainer extends Component {
         super(props);
 
         this.state = {
-            currentLevel: 'proficient',
-            gender: null,
-            highlighted: false,
-            name: '',
+            gender: '',
+            level: '',
+            name: ''
         };
     }
 
@@ -24,60 +23,47 @@ class SectionContainer extends Component {
 
     render() {
         const { sectionId } = this.props.match.params;
-        return (
-            <div className="class-container">
+        return <div className="class-container">
                 <Link to="/">Back</Link>
                 <br />
                 <h1>Class</h1>
-                Id: {sectionId}
+                Section Id: {sectionId}
                 <br />
                 <div className="create">
                     <form onSubmit={this.handleCreate}>
-                        <input
-                            name="name"
-                            onChange={this.handleChange}
-                            placeholder="Name"
-                            type="text"
-                            value={this.state.name}
-                        />
-                        <input
-                            id="genderMale"
-                            name="gender"
-                            onChange={this.handleChange}
-                            type="radio"
-                            value="male"
-                        />
-                        <label htmlFor="genderMale">Male</label>
-                        <input
-                            id="genderFemale"
-                            name="gender"
-                            onChange={this.handleChange}
-                            type="radio"
-                            value="female"
-                        />
-                        <label htmlFor="genderFemale">Female</label>
+                        <input name="name" onChange={this.handleChange} placeholder="Name" type="text" value={this.state.name} />
+                        <label htmlFor="gender">Gender:</label>
+                        <select id="gender" name="gender" onChange={this.handleChange}>
+                            <option value="">Select one</option>
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                        </select>
+                        <label htmlFor="level">Current level:</label>
+                        <select id="level" name="level" onChange={this.handleChange}>
+                            <option value="">Select one</option>
+                            <option value="advanced">Advanced</option>
+                            <option value="proficient">Proficient</option>
+                            <option value="basic">Basic</option>
+                        </select>
                         <button>Create</button>
                     </form>
                 </div>
-                <ul>
-                    {this.renderStudents()}
-                </ul>
-            </div>
-        );
+                <ul>{this.renderStudents()}</ul>
+            </div>;
     }
 
     handleCreate = e => {
         e.preventDefault();
-        // const studentsRef = firebase.database().ref('students');
-        // const student = {
-        //     name: this.state.name,
-        //     gender: this.state.gender,
-        //     currentLevel: this.state.currentLevel,
-        //     highlighted: this.state.highlighted,
-        //     sectionId: this.props.match.params.sectionId
-        // };
-        // studentsRef.push(student);
-        this.setState({ name: '', gender: null });
+        const { gender, level, name } = this.state;
+        
+        if (gender && level && name) {
+            this.props.addStudent(name, gender, this.props.match.params.sectionId, level);
+            this.setState({
+                gender: '',
+                level: '',
+                name: ''
+            });
+        }
     };
 
     handleChange = e => {
@@ -91,7 +77,7 @@ class SectionContainer extends Component {
         for (const id in students) {
             const student = students[id];
             output.push(
-                <li key={id}>{student.name} - {student.gender} - {student.sections[sectionId]}</li>
+                <li key={id}>{student.name} - {student.gender} - {student.sections[sectionId]} - <Link to={`/student/${id}`}>Edit</Link></li>
             );
         }
         return output;
