@@ -1,4 +1,4 @@
-// sectionActions.js
+// SectionActions.js
 import db from '../firebase';
 import { setNotification } from '../actions';
 
