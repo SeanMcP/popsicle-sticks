@@ -6,12 +6,12 @@ export const STUDENT_ACTIONS = {
     SET_STUDENTS: 'SET_STUDENTS'
 };
 
-export const addSection = (name, gender, section_id) => {
+export const addStudent = (name, gender, section_id, current_level) => {
     return (dispatch) => {
-        const section_array = [ section_id ];
+        const sections = { [section_id]: current_level };
         db
             .collection('students')
-            .add({ name, gender, section_array })
+            .add({ name, gender, sections })
             .then(() => {
                 dispatch(setNotification({
                     type: 'SUCCESS',
