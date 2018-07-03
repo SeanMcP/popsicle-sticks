@@ -6,9 +6,5 @@
 
 ### Utilizing
 - ⚛️ React v. 16.3
-- 🔥 Firebase
+- 🔥 Google Firebase Cloud Firestore β
 - 🗺 React-Router
-
-### To-do
-- User login
-- Firebase queries
