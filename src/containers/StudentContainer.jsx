@@ -32,11 +32,13 @@ class StudentContainer extends Component {
         const levelList = [];
         for (const sectionId in sections) {
             const section = this.props.sections[sectionId];
-            levelList.push(
-                <li key={sectionId}>
-                    <Link to={`/section/${sectionId}`}>{section.name}</Link> - {section.type} - {sections[sectionId]}
-                </li>
-            );
+            if (section) {
+                levelList.push(
+                    <li key={sectionId}>
+                        <Link to={`/section/${sectionId}`}>{section.name}</Link> - {section.type} - {sections[sectionId]}
+                    </li>
+                );
+            }
         }
         return <ul>{levelList}</ul>
     }
