@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import SectionRow from '../components/SectionRow';
+import StudentRow from '../components/section/StudentRow';
 import SelectGender from '../components/common/SelectGender';
 import SelectLevel from '../components/common/SelectLevel';
 import {
@@ -49,7 +49,7 @@ class SectionContainer extends Component {
                         <button>Create</button>
                     </form>
                 </div>
-                <ul>{this.renderStudents()}</ul>
+                {this.renderStudents()}
                 {this.state.mode === 'edit' ? (
                     <div>
                         Editing {this.state.student}
@@ -89,11 +89,11 @@ class SectionContainer extends Component {
     renderStudents = () => {
         const { students } = this.props;
         const { sectionId } = this.props.match.params;
-        const output = [];
+        const rows = [];
         for (const id in students) {
             const student = students[id];
-            output.push(
-                <SectionRow
+            rows.push(
+                <StudentRow
                     disabled={id !== this.state.student}
                     editStudent={this.editStudent}
                     gender={student.gender}
@@ -104,7 +104,7 @@ class SectionContainer extends Component {
                 />
             );
         }
-        return output;
+        return <table><tbody>{rows}</tbody></table>;
     }
 
     setMode = (mode) => {
