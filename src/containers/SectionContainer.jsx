@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import SectionRow from '../components/SectionRow';
+import SelectGender from '../components/common/SelectGender';
+import SelectLevel from '../components/common/SelectLevel';
 import {
     addStudent,
     getStudentsBySection
@@ -13,7 +16,8 @@ class SectionContainer extends Component {
         this.state = {
             gender: '',
             level: '',
-            name: ''
+            name: '',
+            mode: 'none'
         };
     }
 
@@ -32,24 +36,36 @@ class SectionContainer extends Component {
                 <div className="create">
                     <form onSubmit={this.handleCreate}>
                         <input name="name" onChange={this.handleChange} placeholder="Name" type="text" value={this.state.name} />
-                        <label htmlFor="gender">Gender:</label>
-                        <select id="gender" name="gender" onChange={this.handleChange}>
-                            <option value="">Select one</option>
-                            <option value="female">Female</option>
-                            <option value="male">Male</option>
-                        </select>
-                        <label htmlFor="level">Current level:</label>
-                        <select id="level" name="level" onChange={this.handleChange}>
-                            <option value="">Select one</option>
-                            <option value="advanced">Advanced</option>
-                            <option value="proficient">Proficient</option>
-                            <option value="basic">Basic</option>
-                        </select>
+                        <SelectGender
+                            handleChange={this.handleChange}
+                            label="Gender:"
+                            value={this.state.gender}
+                        />
+                        <SelectLevel
+                            handleChange={this.handleChange}
+                            label="Current level:"
+                            value={this.state.level}
+                        />
                         <button>Create</button>
                     </form>
                 </div>
                 <ul>{this.renderStudents()}</ul>
+                {this.state.mode === 'edit' ? (
+                    <div>
+                        Editing {this.state.student}
+                        <div onClick={this.clearStudent}>Cancel</div>
+                        <div onClick={this.clearStudent}>Save</div>
+                    </div>
+                ) : null}
             </div>;
+    }
+
+    clearStudent = () => {
+        this.setState({ mode: 'none', student: '' });
+    }
+
+    editStudent = (id) => {
+        this.setState({ mode: 'edit', student: id });
     }
 
     handleCreate = e => {
@@ -77,10 +93,22 @@ class SectionContainer extends Component {
         for (const id in students) {
             const student = students[id];
             output.push(
-                <li key={id}>{student.name} - {student.gender} - {student.sections[sectionId]} - <Link to={`/student/${id}`}>View student</Link></li>
+                <SectionRow
+                    disabled={id !== this.state.student}
+                    editStudent={this.editStudent}
+                    gender={student.gender}
+                    id={id}
+                    key={id}
+                    level={student.sections[sectionId]}
+                    name={student.name}
+                />
             );
         }
         return output;
+    }
+
+    setMode = (mode) => {
+        this.setState({ mode });
     }
 }
 
