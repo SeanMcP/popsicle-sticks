@@ -6,7 +6,8 @@ import SelectGender from '../components/common/SelectGender';
 import SelectLevel from '../components/common/SelectLevel';
 import {
     addStudent,
-    getStudentsBySection
+    getStudentsBySection,
+    updateStudentLevel
 } from '../actions';
 
 class SectionContainer extends Component {
@@ -17,7 +18,6 @@ class SectionContainer extends Component {
             gender: '',
             level: '',
             name: '',
-            mode: 'none'
         };
     }
 
@@ -50,22 +50,7 @@ class SectionContainer extends Component {
                     </form>
                 </div>
                 {this.renderStudents()}
-                {this.state.mode === 'edit' ? (
-                    <div>
-                        Editing {this.state.student}
-                        <div onClick={this.clearStudent}>Cancel</div>
-                        <div onClick={this.clearStudent}>Save</div>
-                    </div>
-                ) : null}
             </div>;
-    }
-
-    clearStudent = () => {
-        this.setState({ mode: 'none', student: '' });
-    }
-
-    editStudent = (id) => {
-        this.setState({ mode: 'edit', student: id });
     }
 
     handleCreate = e => {
@@ -94,9 +79,8 @@ class SectionContainer extends Component {
             const student = students[id];
             rows.push(
                 <StudentRow
-                    disabled={id !== this.state.student}
-                    editStudent={this.editStudent}
                     gender={student.gender}
+                    handleChange={this.updateStudentLevel}
                     id={id}
                     key={id}
                     level={student.sections[sectionId]}
@@ -110,6 +94,10 @@ class SectionContainer extends Component {
     setMode = (mode) => {
         this.setState({ mode });
     }
+
+    updateStudentLevel = (studentId, newLevel) => {
+        return this.props.updateStudentLevel(studentId, this.props.match.params.sectionId, newLevel);
+    }
 }
 
 const mapStateToProps = (state) => {
@@ -120,7 +108,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     addStudent,
-    getStudentsBySection
+    getStudentsBySection,
+    updateStudentLevel
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SectionContainer);

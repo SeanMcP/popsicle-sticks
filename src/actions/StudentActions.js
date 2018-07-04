@@ -7,9 +7,9 @@ export const STUDENT_ACTIONS = {
     SET_STUDENTS: 'SET_STUDENTS'
 };
 
-export const addStudent = (name, gender, section_id, current_level) => {
+export const addStudent = (name, gender, sectionId, currentLevel) => {
     return (dispatch) => {
-        const sections = { [section_id]: current_level };
+        const sections = { [sectionId]: currentLevel };
         db
             .collection('students')
             .add({ name, gender, sections })
@@ -29,16 +29,12 @@ export const addStudent = (name, gender, section_id, current_level) => {
     };
 };
 
-export const getStudent = (student_id) => {
+export const getStudent = (studentId) => {
     return (dispatch) => {
         db
             .collection('students')
-            .doc(student_id)
+            .doc(studentId)
             .onSnapshot((doc) => {
-                // const output = {};
-                // querySnapshot.forEach((doc) => {
-                //     output[doc.id] = doc.data();
-                // });
                 return dispatch({
                     type: STUDENT_ACTIONS.SET_STUDENT,
                     data: doc.data()
@@ -64,11 +60,11 @@ export const getAllStudents = () => {
     };
 };
 
-export const getStudentsBySection = (section_id) => {
+export const getStudentsBySection = (sectionId) => {
     return (dispatch) => {
         db
             .collection('students')
-            .where(`sections.${section_id}`, '>', '0')
+            .where(`sections.${sectionId}`, '>', '0')
             .onSnapshot((querySnapshot) => {
                 const output = {};
                 querySnapshot.forEach((doc) => {
@@ -81,3 +77,29 @@ export const getStudentsBySection = (section_id) => {
             });
     };
 };
+
+export const updateStudentLevel = (studentId, sectionId, newLevel) => {
+    return (dispatch) => {
+        db
+            .collection('students')
+            .doc(studentId)
+            .set({
+                sections: {
+                    [sectionId]: newLevel
+                }
+            }, { merge: true })
+            .then(() => {
+                dispatch(setNotification({
+                    type: 'SUCCESS',
+                    message: 'Successfully updated level!'
+                }));
+            })
+            .catch((error) => {
+                dispatch(setNotification({
+                    type: 'FAILURE',
+                    message: 'Failed to updated level',
+                    error
+                }));
+            });
+    }
+}
