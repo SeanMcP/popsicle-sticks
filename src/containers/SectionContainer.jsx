@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import StudentRow from '../components/section/StudentRow';
 import SelectGender from '../components/common/SelectGender';
 import SelectLevel from '../components/common/SelectLevel';
+import StudentAttendance from '../components/section/StudentAttendance';
+import StudentRow from '../components/section/StudentRow';
 import {
     addStudent,
     getStudentsBySection,
@@ -18,6 +19,7 @@ class SectionContainer extends Component {
             gender: '',
             level: '',
             name: '',
+            mode: 'none'
         };
     }
 
@@ -27,12 +29,31 @@ class SectionContainer extends Component {
 
     render() {
         const { sectionId } = this.props.match.params;
-        return <div className="class-container">
+        return (
+            <div className="class-container">
                 <Link to="/">Back</Link>
                 <br />
                 <h1>Class</h1>
                 Section Id: {sectionId}
                 <br />
+                <div className="tools">
+                    <div
+                        onClick={() => this.setMode('random')}
+                    >
+                        Random Student Picker
+                    </div>
+                    <div
+                        onClick={() => this.setMode('group')}
+                    >
+                        Group Maker
+                    </div>
+                </div>
+                {this.state.mode !== 'none' ? (
+                    <StudentAttendance
+                        cancel={() => this.setMode('none')}
+                        mode={this.state.mode}
+                    />
+                ) : null}
                 <div className="create">
                     <form onSubmit={this.handleCreate}>
                         <input name="name" onChange={this.handleChange} placeholder="Name" type="text" value={this.state.name} />
@@ -50,7 +71,8 @@ class SectionContainer extends Component {
                     </form>
                 </div>
                 {this.renderStudents()}
-            </div>;
+            </div>
+        );
     }
 
     handleCreate = e => {
