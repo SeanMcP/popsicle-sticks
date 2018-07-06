@@ -52,6 +52,7 @@ class SectionContainer extends Component {
                     <StudentAttendance
                         cancel={() => this.setMode('none')}
                         mode={this.state.mode}
+                        section={this.props.match.params.sectionId}
                     />
                 ) : null}
                 <div className="create">

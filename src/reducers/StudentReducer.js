@@ -2,12 +2,17 @@
 import { STUDENT_ACTIONS } from '../actions';
 
 const initialState = {
+    attendance: {},
     list: {},
     student: {}
 };
 
 const StudentReducer = (state = initialState, action) => {
     switch (action.type) {
+        case STUDENT_ACTIONS.SET_ATTENDANCE:
+            return Object.assign({}, state, {
+                attendance: action.data
+            });
         case STUDENT_ACTIONS.SET_STUDENT:
             return Object.assign({}, state, {
                 student: action.data

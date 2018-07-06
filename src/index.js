@@ -7,6 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
+import logger from 'redux-logger'
 import reducer from './reducers';
 
 import App from './components/App';
@@ -17,7 +18,7 @@ import StudentContainer from './containers/StudentContainer';
 import './styles/index.css';
 
 // Redux
-const store = createStore(reducer, applyMiddleware(reduxThunk));
+const store = createStore(reducer, applyMiddleware(logger, reduxThunk));
 
 ReactDOM.render(
     <BrowserRouter>

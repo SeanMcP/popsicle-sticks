@@ -3,6 +3,7 @@ import db from '../firebase';
 import { setNotification } from '../actions';
 
 export const STUDENT_ACTIONS = {
+    SET_ATTENDANCE: 'SET_ATTENDANCE',
     SET_STUDENT: 'SET_STUDENT',
     SET_STUDENTS: 'SET_STUDENTS'
 };
@@ -78,6 +79,18 @@ export const getStudentsBySection = (sectionId) => {
     };
 };
 
+export const setAttendance = (sectionId, attendanceArray) => {
+    return (dispatch, getState) => {
+        const { attendance } = getState().students;
+        attendance[sectionId] = attendanceArray;
+
+        return dispatch({
+            type: STUDENT_ACTIONS.SET_ATTENDANCE,
+            data: attendance
+        });
+    };
+};
+
 export const updateStudentLevel = (studentId, sectionId, newLevel) => {
     return (dispatch) => {
         db
@@ -101,5 +114,5 @@ export const updateStudentLevel = (studentId, sectionId, newLevel) => {
                     error
                 }));
             });
-    }
-}
+    };
+};
