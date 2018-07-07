@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {
     setAttendance
 } from '../../actions';
@@ -49,7 +50,8 @@ class StudentAttendance extends Component {
     };
 
     setAttendance = () => {
-        return this.props.setAttendance(this.props.section, this.state.present);
+        this.props.setAttendance(this.props.section, this.state.present);
+        return this.props.history.push(`${this.props.section}/${this.props.mode}`);
     };
 
     togglePresent = (id) => {
@@ -78,4 +80,6 @@ StudentAttendance.propTypes = {
     section: PropTypes.string.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentAttendance);
+export default withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(StudentAttendance)
+);
