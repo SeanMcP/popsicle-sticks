@@ -11,9 +11,9 @@ class RandomContainer extends Component {
         super(props);
 
         this.state = {
+            displayPreview: false,
             index: 0,
             list: this.props.attendance ? this.props.attendance : [],
-            preview: false
         };
     }
 
@@ -35,33 +35,33 @@ class RandomContainer extends Component {
             <div className="random-container">
                 <Link to={`/section/${this.props.match.params.sectionId}`}>Back</Link>
                 <h1>Random</h1>
-                <div onClick={this.indexIncrement}>Next</div>
-                <div onClick={this.indexDecrement}>Back</div>
+                <div onClick={this.nextStudent}>Next</div>
+                <div onClick={this.prevStudent}>Back</div>
                 {this.renderStudent()}
                 <div onClick={this.togglePreview}>
-                    {`${this.state.preview ? 'Hide' : 'Show'} preview`}
+                    {`${this.state.displayPreview ? 'Hide' : 'Show'} preview`}
                 </div>
             </div>
         );
     }
 
-    indexDecrement = () => {
+    prevStudent = () => {
         this.setState((prevState, props) => {
             const max = props.attendance ? props.attendance.length - 1 : Object.keys(props.students).length - 1;
-            const nextIndex = prevState.index - 1;
-            if (nextIndex < 0) {
+            const prevIndex = prevState.index - 1;
+            if (prevIndex < 0) {
                 return {
                     index: max,
                     list: Shuffle(prevState.list)
                 }
             }
             return {
-                index: nextIndex
+                index: prevIndex
             };
         })
     }
 
-    indexIncrement = () => {
+    nextStudent = () => {
         this.setState((prevState, props) => {
             const max = props.attendance ? props.attendance.length - 1 : Object.keys(props.students).length - 1;
             const nextIndex = prevState.index + 1;
@@ -79,14 +79,14 @@ class RandomContainer extends Component {
 
     renderStudent = () => {
         const { students } = this.props;
-        const { index, list, preview } = this.state;
+        const { displayPreview, index, list } = this.state;
         if (ObjVal(students) && list.length) {
             const current = students[list[index]];
             const next = students[list[index + 1]];
             const prev = students[list[index - 1]];
             return (
                 <div className="students">
-                    {preview ? (
+                    {displayPreview ? (
                         <div className="next">
                             Next up: {index + 1 >= list.length ? 'Random' : next.name}
                         </div>
@@ -94,7 +94,7 @@ class RandomContainer extends Component {
                     <div className="current">
                         {current.name}
                     </div>
-                    {preview ? (
+                    {displayPreview ? (
                         <div className="prev">
                             Previous: {index - 1 < 0 ? 'Random' : prev.name}
                         </div>
@@ -106,7 +106,7 @@ class RandomContainer extends Component {
 
     togglePreview = () => {
         this.setState((prevState) => ({
-            preview: !prevState.preview
+            displayPreview: !prevState.displayPreview
         }));
     }
 }
