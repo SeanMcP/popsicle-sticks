@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Capitalize } from '../../utils';
 
 const Select = (props) => {
     const options = [<option key="initial" value="">Select one</option>];
     props.options.forEach(option => {
         options.push(
             <option key={option} value={option}>
-                {option}
+                {Capitalize(option)}
             </option>
         );
     });
