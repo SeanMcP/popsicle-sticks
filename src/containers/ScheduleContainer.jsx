@@ -20,14 +20,14 @@ class ScheduleContainer extends Component {
     render() {
         return (
             <div className="schedule-container">
-                Class list container
+                <h1>Your schedule</h1>
                 {this.state.displayCreator
                     ? <SectionCreator handleClose={this.toggleCreator} />
                     : <div onClick={this.toggleCreator}>Add section</div>
                 }
-                <ul className="list">
+                <div className="list">
                     {this.renderSections()}
-                </ul>
+                </div>
             </div>
         )
     }
@@ -37,11 +37,13 @@ class ScheduleContainer extends Component {
         for (const id in this.props.sectionList) {
             const section = this.props.sectionList[id];
             output.push(
-                <li key={output.length}>
-                    <Link className={section.type} to={`/section/${id}`}>
-                        {section.name}
-                    </Link>
-                </li>
+                <Link
+                    className={`section ${section.type}`}
+                    key={id}
+                    to={`/section/${id}`}
+                >
+                    {section.name}
+                </Link>
             );
         }
         return output;

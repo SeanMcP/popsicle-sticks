@@ -1,7 +1,9 @@
 @import './reset.css';
 @import './variables.css';
+@import './type.css';
 
 @import './header.css';
+@import './scheduleContainer.css';
 
 @import url('https://fonts.googleapis.com/css?family=Lato:300,700');
 

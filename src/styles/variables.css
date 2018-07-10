@@ -20,4 +20,11 @@
     --gray80:     #424242;
     --gray90:     #212121;
 
+    /* Borders by background color */
+    --border-white: 1px solid var(--gray30);
+
+    --shadow:       0 0 0.125em rgba(0, 0, 0, 0.125);
+
+    --tablet:       1000px;
+    --mobile:       600px;
 }

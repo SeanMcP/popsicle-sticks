@@ -1,0 +1,23 @@
+.schedule-container {
+    margin: 0 auto;
+    max-width: var(--tablet);
+    width: 100%;
+}
+
+.schedule-container
+.list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1em;
+    margin-top: 1em;
+}
+
+.schedule-container
+.list
+.section {
+    background: white;
+    border: var(--border-white);
+    /* box-shadow: var(--shadow); */
+    height: 8em;
+    padding: 1em;
+}
