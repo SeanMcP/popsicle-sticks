@@ -10,15 +10,17 @@ class SectionCreator extends Component {
 
         this.state = {
             name: '',
-            level: null,
+            level: '',
+            type: ''
         };
     }
 
     render() {
         return (
-            <div className="create-section-container">
+            <div className="section-creator">
+                <h2>Create a new section</h2>
                 <form onSubmit={this.handleCreate}>
-                    <label htmlFor="name">Section name:</label>
+                    <label htmlFor="name">Name</label>
                     <input
                         id="name"
                         name="name"
@@ -28,10 +30,17 @@ class SectionCreator extends Component {
                     />
                     <Select
                         handleChange={this.handleChange}
-                        label="Section level: "
+                        label="Level"
                         name="level"
                         options={['elementary', 'middle', 'secondary']}
                         value={this.state.level}
+                    />
+                    <Select
+                        handleChange={this.handleChange}
+                        label="Type"
+                        name="type"
+                        options={['math', 'science', 'social studies', 'reading', 'writing', 'general'].sort()}
+                        value={this.state.type}
                     />
                     <button disabled={!this.state.name && !this.state.type}>
                         Create

@@ -1,5 +1,5 @@
 .schedule-container {
-    margin: 0 auto;
+    margin: 1em auto;
     max-width: var(--tablet);
     width: 100%;
 }
@@ -17,7 +17,36 @@
 .section {
     background: white;
     border: var(--border-white);
+    color: var(--text);
     /* box-shadow: var(--shadow); */
     height: 8em;
     padding: 1em;
+    text-decoration: none;
+    transition: all 200ms ease-in-out;
+}
+
+.schedule-container
+.list
+.section:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+    .schedule-container {
+        margin-left: 1em;
+        margin-right: 1em;
+        width: inherit;
+    }
+    .schedule-container .list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .schedule-container .list {
+        grid-template-columns: 1fr;
+    }
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/index.css';
 import Header from './layout/Header';
 
 const App = ({ children }) => (

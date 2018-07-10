@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Capitalize } from '../../utils';
 
@@ -12,7 +12,7 @@ const Select = (props) => {
         );
     });
     return (
-        <div className={`${props.name}-select`}>
+        <Fragment>
             {props.label ? <label htmlFor={props.name}>{props.label}</label> : null}
             <select
                 disabled={typeof props.disabled === 'undefined' ? false : props.disabled}
@@ -23,7 +23,7 @@ const Select = (props) => {
             >
                 {options}
             </select>
-        </div>
+        </Fragment>
     );
 };
 

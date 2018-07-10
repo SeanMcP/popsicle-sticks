@@ -16,7 +16,7 @@ import SectionContainer from './containers/SectionContainer';
 import ScheduleContainer from './containers/ScheduleContainer';
 import StudentContainer from './containers/StudentContainer';
 
-import './styles/index.css';
+import './styles/_styles.css';
 
 // Redux
 const store = createStore(reducer, applyMiddleware(logger, reduxThunk));
