@@ -1,0 +1,20 @@
+.button {
+    background: var(--blue);
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    font-weight: bold;
+    padding: calc(1em - 2px);
+}
+
+.button i {
+    margin-right: 0.5em;
+}
+
+.button.secondary {
+    background: transparent;
+    border-color: var(--blue);
+    color: var(--blue);
+}

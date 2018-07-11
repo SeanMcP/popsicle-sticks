@@ -2,6 +2,7 @@
 @import './variables.css';
 @import './type.css';
 
+@import './button.css';
 @import './header.css';
 @import './scheduleContainer.css';
 @import './sectionCreator.css';
@@ -15,6 +16,8 @@ body {
   font-size: 16px;
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .student-attendance .absent {
