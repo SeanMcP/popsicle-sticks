@@ -4,6 +4,10 @@
     width: 100%;
 }
 
+.schedule-container h1 {
+    margin-bottom: 1em;
+}
+
 .schedule-container
 .list {
     display: grid;
@@ -15,11 +19,15 @@
 .schedule-container
 .list
 .section {
+    align-items: center;
     background: white;
     border: var(--border-white);
     color: var(--text);
-    /* box-shadow: var(--shadow); */
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-flow: column nowrap;
     height: 8em;
+    justify-content: center;
     padding: 1em;
     text-decoration: none;
     transition: all 200ms ease-in-out;
@@ -30,6 +38,10 @@
 .section:hover {
     border-color: var(--blue);
     color: var(--blue);
+}
+
+.schedule-container .list .section span {
+    margin-top: 1em;
 }
 
 /* Tablet */

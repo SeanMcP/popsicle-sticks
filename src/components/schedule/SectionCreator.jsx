@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Button from '../atomic/Button';
 import Select from '../atomic/Select';
 import { addSection } from '../../actions';
 
@@ -10,7 +11,6 @@ class SectionCreator extends Component {
 
         this.state = {
             name: '',
-            level: '',
             type: ''
         };
     }
@@ -19,7 +19,7 @@ class SectionCreator extends Component {
         return (
             <div className="section-creator">
                 <h2>Create a new section</h2>
-                <form onSubmit={this.handleCreate}>
+                <form>
                     <label htmlFor="name">Name</label>
                     <input
                         id="name"
@@ -30,24 +30,24 @@ class SectionCreator extends Component {
                     />
                     <Select
                         handleChange={this.handleChange}
-                        label="Level"
-                        name="level"
-                        options={['elementary', 'middle', 'secondary']}
-                        value={this.state.level}
-                    />
-                    <Select
-                        handleChange={this.handleChange}
                         label="Type"
                         name="type"
-                        options={['math', 'science', 'social studies', 'reading', 'writing', 'general'].sort()}
+                        options={['math', 'science', 'social studies', 'language arts', 'general'].sort()}
                         value={this.state.type}
                     />
-                    <button disabled={!this.state.name && !this.state.type}>
+                    <Button
+                        className="full"
+                        handleClick={this.handleCreate}
+                        disabled={!(this.state.name && this.state.level && this.state.type)}
+                    >
                         Create
-                    </button>
-                    <div onClick={this.props.handleClose}>
+                    </Button>
+                    <Button
+                        className="secondary full"
+                        handleClick={this.props.handleClose}
+                    >
                         Cancel
-                    </div>
+                    </Button>
                 </form>
             </div>
         )
@@ -55,10 +55,10 @@ class SectionCreator extends Component {
 
     handleCreate = e => {
         e.preventDefault();
-        const { name, level } = this.state;
-        this.props.addSection(name, level, 'Lorem ipsum');
+        const { name, type } = this.state;
+        this.props.addSection(name, type);
         // TODO: Only clear on success
-        return this.setState({ name: '', level: null }, this.props.handleClose);
+        return this.setState({ name: '', type: '' }, this.props.handleClose);
     };
 
     handleChange = (e) => {

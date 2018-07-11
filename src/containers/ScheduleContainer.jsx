@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Button from '../components/atomic/Button';
+import Icon from '../components/atomic/Icon';
 import SectionCreator from '../components/schedule/SectionCreator';
 import { getSections } from '../actions';
 
@@ -23,7 +25,7 @@ class ScheduleContainer extends Component {
                 <h1>Your schedule</h1>
                 {this.state.displayCreator
                     ? <SectionCreator handleClose={this.toggleCreator} />
-                    : <div onClick={this.toggleCreator}>Add section</div>
+                    : <Button handleClick={this.toggleCreator} icon="fas fa-plus">Add section</Button>
                 }
                 <div className="list">
                     {this.renderSections()}
@@ -42,7 +44,8 @@ class ScheduleContainer extends Component {
                     key={id}
                     to={`/section/${id}`}
                 >
-                    {section.name}
+                    <Icon icon="fas fa-chalkboard fa-3x"/>
+                    <span>{section.name}</span>
                 </Link>
             );
         }
