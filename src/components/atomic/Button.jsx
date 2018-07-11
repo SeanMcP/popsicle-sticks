@@ -4,7 +4,7 @@ import Icon from './Icon';
 
 const Button = (props) => (
     <div
-        className={`button ${props.className ? props.className : ''}`}
+        className={`button ${props.className ? props.className : ''} ${props.disabled ? 'disabled' : ''}`}
         onClick={props.handleClick || null}
     >
         {props.icon ? (
@@ -16,6 +16,7 @@ const Button = (props) => (
 
 Button.propTypes = {
     className: PropTypes.string,
+    disabled: PropTypes.bool,
     handleClick: PropTypes.func,
 };
 

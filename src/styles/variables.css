@@ -23,6 +23,8 @@
     /* Borders by background color */
     --border-white: 1px solid var(--gray30);
 
+    --border-radius: 0.25em;
+
     --blue:         var(--blue60);
     --text:         var(--gray80);
 
