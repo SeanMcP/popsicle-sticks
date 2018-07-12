@@ -21,7 +21,7 @@ class ScheduleContainer extends Component {
 
     render() {
         return (
-            <div className="schedule-container">
+            <div className="schedule container">
                 <h1>Your schedule</h1>
                 {this.state.displayCreator
                     ? <SectionCreator handleClose={this.toggleCreator} />

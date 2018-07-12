@@ -1,14 +1,8 @@
-.schedule-container {
-    margin: 1em auto;
-    max-width: var(--tablet);
-    width: 100%;
-}
-
-.schedule-container h1 {
+.schedule.container h1 {
     margin-bottom: 1em;
 }
 
-.schedule-container
+.schedule.container
 .list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -16,7 +10,7 @@
     margin-top: 1em;
 }
 
-.schedule-container
+.schedule.container
 .list
 .section {
     align-items: center;
@@ -33,32 +27,27 @@
     transition: all 200ms ease-in-out;
 }
 
-.schedule-container
+.schedule.container
 .list
 .section:hover {
     border-color: var(--blue);
     color: var(--blue);
 }
 
-.schedule-container .list .section span {
+.schedule.container .list .section span {
     margin-top: 1em;
 }
 
 /* Tablet */
 @media (max-width: 1000px) {
-    .schedule-container {
-        margin-left: 1em;
-        margin-right: 1em;
-        width: inherit;
-    }
-    .schedule-container .list {
+    .schedule.container .list {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 /* Mobile */
 @media (max-width: 600px) {
-    .schedule-container .list {
+    .schedule.container .list {
         grid-template-columns: 1fr;
     }
 }

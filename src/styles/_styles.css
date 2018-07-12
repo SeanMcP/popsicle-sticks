@@ -1,25 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 @import './reset.css';
 @import './variables.css';
 @import './type.css';
 
 @import './button.css';
+@import './common.css';
 @import './header.css';
 @import './scheduleContainer.css';
 @import './sectionCreator.css';
-
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
-
-body {
-  background: var(--gray10);
-  color: var(--gray90);
-  font-family: 'Lato', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.student-attendance .absent {
-  opacity: 0.5;
-}
