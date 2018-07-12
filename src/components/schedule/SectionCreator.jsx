@@ -67,11 +67,11 @@ class SectionCreator extends Component {
 }
 
 const mapDispatchToProps = {
-    addSection,
+    addSection
 }
 
 SectionCreator.propTypes = {
-    handleClose: PropTypes.func.isRequired
+    handleClose: PropTypes.func
 }
 
 export default connect(null, mapDispatchToProps)(SectionCreator);

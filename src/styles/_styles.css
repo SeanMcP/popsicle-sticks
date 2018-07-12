@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 @import './reset.css';
+@import './animations.css';
 @import './variables.css';
 @import './type.css';
 
 @import './button.css';
 @import './common.css';
 @import './header.css';
+@import './modal.css';
 @import './scheduleContainer.css';
 @import './sectionCreator.css';

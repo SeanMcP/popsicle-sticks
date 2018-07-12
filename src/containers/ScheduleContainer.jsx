@@ -4,16 +4,9 @@ import { Link } from 'react-router-dom';
 import Button from '../components/atomic/Button';
 import Icon from '../components/atomic/Icon';
 import SectionCreator from '../components/schedule/SectionCreator';
-import { getSections } from '../actions';
+import { getSections, setModal } from '../actions';
 
 class ScheduleContainer extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            displayCreator: false
-        };
-    }
 
     componentDidMount() {
         this.props.getSections();
@@ -23,10 +16,12 @@ class ScheduleContainer extends Component {
         return (
             <div className="schedule container">
                 <h1>Your schedule</h1>
-                {this.state.displayCreator
-                    ? <SectionCreator handleClose={this.toggleCreator} />
-                    : <Button handleClick={this.toggleCreator} icon="fas fa-plus">Add section</Button>
-                }
+                <Button
+                    handleClick={this.openCreator}
+                    icon="fas fa-plus"
+                >
+                    Add section
+                </Button>
                 <div className="list">
                     {this.renderSections()}
                 </div>
@@ -52,10 +47,10 @@ class ScheduleContainer extends Component {
         return output;
     }
 
-    toggleCreator = () => {
-        return this.setState((prevState) => (
-            { displayCreator: !prevState.displayCreator }
-        ));
+    openCreator = () => {
+        return this.props.setModal((renderProps) =>
+            <SectionCreator handleClose={renderProps.close} />
+        );
     }
 }
 
@@ -63,10 +58,11 @@ const mapStateToProps = (state) => {
     return {
         sectionList: state.sections.list
     }
-};
+}
 
 const mapDispatchToProps = {
-    getSections
-};
+    getSections,
+    setModal
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScheduleContainer);
