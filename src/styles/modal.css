@@ -1,0 +1,28 @@
+.modal {
+    align-items: center;
+    animation: fade-in 200ms ease-in-out;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.modal .overlay {
+    background: rgba(0, 0, 0, 0.5);
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.modal .content {
+    max-width: var(--mobile);
+    padding: 2em;
+    width: 100%;
+    z-index: 2;
+}
