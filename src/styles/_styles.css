@@ -6,7 +6,9 @@
 
 @import './button.css';
 @import './common.css';
+@import './form.css';
 @import './header.css';
 @import './modal.css';
+@import './select.css';
 @import './scheduleContainer.css';
 @import './sectionCreator.css';

@@ -30,6 +30,8 @@
 
     --shadow:       0 0 0.125em rgba(0, 0, 0, 0.125);
 
+    --an-md:        200ms ease-in-out;
+
     --tablet:       1000px;
     --mobile:       600px;
 }

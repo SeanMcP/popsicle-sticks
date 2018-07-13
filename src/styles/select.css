@@ -1,0 +1,58 @@
+.select-menu {
+    align-items: center;
+    display: flex;
+    position: relative;
+    padding: calc(0.5em + 2px) 0.5em;
+}
+
+.select-menu.open {
+    border-color: var(--blue40);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.select-menu
+.value {
+    flex-grow: 1;
+}
+
+.select-menu i {
+    transition: all var(--an-md);
+}
+
+.select-menu
+i:hover,
+.select-menu.open
+i {
+    color: var(--blue);
+}
+
+.select-menu
+.menu {
+    background: white;
+    border: var(--border-white);
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    border-top: 0;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+    left: -1px;
+    max-height: 10em;
+    overflow: scroll;
+    position: absolute;
+    right: -1px;
+    top: calc(100% + 1px);
+    z-index: 1;
+}
+
+.select-menu
+.menu
+.option {
+    cursor: pointer;
+    padding: 0.5em;
+}
+
+.select-menu
+.menu
+.option:hover {
+    background: var(--blue5);
+}
