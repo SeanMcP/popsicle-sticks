@@ -12,6 +12,7 @@ const Icon = (props) => (
 
 Icon.propTypes = {
     className: PropTypes.string,
+    handleClick: PropTypes.func,
     icon: PropTypes.string.isRequired,
 };
 
