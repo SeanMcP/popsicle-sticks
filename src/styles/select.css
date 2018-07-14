@@ -1,5 +1,6 @@
 .select-menu {
     align-items: center;
+    cursor: pointer;
     display: flex;
     position: relative;
     padding: calc(0.5em + 2px) 0.5em;
@@ -13,7 +14,13 @@
 
 .select-menu
 .value {
+    color: var(--text-gray);
     flex-grow: 1;
+}
+
+.select-menu.has-value
+.value {
+    color: var(--text);
 }
 
 .select-menu i {

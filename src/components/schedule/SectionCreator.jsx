@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Button from '../atomic/Button';
 import Select from '../atomic/Select';
-import SelectMenu from '../atomic/SelectMenu';
 import { addSection } from '../../actions';
 
 class SectionCreator extends Component {
@@ -29,12 +28,11 @@ class SectionCreator extends Component {
                         type="text"
                         value={this.state.name}
                     />
-                    <SelectMenu
+                    <Select
                         handleChange={this.handleChange}
                         label="Type"
                         name="type"
                         options={['math', 'science', 'social studies', 'language arts', 'general education'].sort()}
-                        placeholder="Section type"
                         value={this.state.type}
                     />
                     <Button

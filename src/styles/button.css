@@ -46,10 +46,3 @@
     border-color: var(--blue70);
     color: var(--blue70);
 }
-
-/* Disabled */
-
-.button.disabled {
-    pointer-events: none;
-    opacity: 0.5;
-}

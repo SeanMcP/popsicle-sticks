@@ -27,6 +27,7 @@
 
     --blue:         var(--blue60);
     --text:         var(--gray80);
+    --text-gray:    var(--gray50);
 
     --shadow:       0 0 0.125em rgba(0, 0, 0, 0.125);
 
