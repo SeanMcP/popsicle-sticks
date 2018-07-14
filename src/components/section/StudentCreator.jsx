@@ -3,23 +3,25 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Button from '../atomic/Button';
 import Input from '../atomic/Input';
-import Select from '../atomic/Select';
-import { addSection } from '../../actions';
+import SelectGender from '../common/SelectGender';
+import SelectLevel from '../common/SelectLevel';
+import { addStudent } from '../../actions';
 
-class SectionCreator extends Component {
+class StudentCreator extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            name: '',
-            type: ''
+            gender: '',
+            level: '',
+            name: ''
         };
     }
 
     render() {
         return (
-            <div className="section-creator creator">
-                <h2>Create a new section</h2>
+            <div className="student-creator creator">
+                <h2>Add a student</h2>
                 <form>
                     <Input
                         handleChange={this.handleChange}
@@ -27,17 +29,20 @@ class SectionCreator extends Component {
                         name="name"
                         value={this.state.name}
                     />
-                    <Select
+                    <SelectGender
                         handleChange={this.handleChange}
-                        label="Type"
-                        name="type"
-                        options={['math', 'science', 'social studies', 'language arts', 'general education'].sort()}
-                        value={this.state.type}
+                        label="Gender"
+                        value={this.state.gender}
+                    />
+                    <SelectLevel
+                        handleChange={this.handleChange}
+                        label="Current level"
+                        value={this.state.level}
                     />
                     <Button
                         className="full"
                         handleClick={this.handleCreate}
-                        disabled={!(this.state.name && this.state.level && this.state.type)}
+                        disabled={!(this.state.name && this.state.level && this.state.gender)}
                     >
                         Create
                     </Button>
@@ -54,10 +59,16 @@ class SectionCreator extends Component {
 
     handleCreate = e => {
         e.preventDefault();
-        const { name, type } = this.state;
-        this.props.addSection(name, type);
-        // TODO: Only clear on success
-        return this.setState({ name: '', type: '' }, this.props.handleClose);
+        const { gender, level, name } = this.state;
+
+        if (gender && level && name) {
+            this.props.addStudent(name, gender, this.props.section, level);
+            this.setState({
+                gender: '',
+                level: '',
+                name: ''
+            }, this.props.handleClose);
+        }
     };
 
     handleChange = (e) => {
@@ -66,11 +77,12 @@ class SectionCreator extends Component {
 }
 
 const mapDispatchToProps = {
-    addSection
+    addStudent
 }
 
-SectionCreator.propTypes = {
-    handleClose: PropTypes.func
+StudentCreator.propTypes = {
+    handleClose: PropTypes.func,
+    section: PropTypes.string.isRequired
 }
 
-export default connect(null, mapDispatchToProps)(SectionCreator);
+export default connect(null, mapDispatchToProps)(StudentCreator);

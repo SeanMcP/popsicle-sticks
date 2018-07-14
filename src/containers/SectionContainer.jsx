@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '../components/atomic/Button';
-import Input from '../components/atomic/Input';
-import SelectGender from '../components/common/SelectGender';
-import SelectLevel from '../components/common/SelectLevel';
+import StudentCreator from '../components/section/StudentCreator';
 import StudentAttendance from '../components/section/StudentAttendance';
 import StudentRow from '../components/section/StudentRow';
 import {
     addStudent,
     getStudentsBySection,
+    setModal,
     updateStudentLevel
 } from '../actions';
 
@@ -18,9 +17,6 @@ class SectionContainer extends Component {
         super(props);
 
         this.state = {
-            gender: '',
-            level: '',
-            name: '',
             mode: 'none'
         };
     }
@@ -39,17 +35,19 @@ class SectionContainer extends Component {
                 Section Id: {sectionId}
                 <br />
                 <div className="tools">
-                    <div
-                        onClick={() => this.setMode('random')}
-                    >
+                    <Button handleClick={() => this.setMode('random')}>
                         Random Student Picker
-                    </div>
-                    <div
-                        onClick={() => this.setMode('group')}
-                    >
+                    </Button>
+                    <Button handleClick={() => this.setMode('group')}>
                         Group Maker
-                    </div>
+                    </Button>
                 </div>
+                <Button
+                    handleClick={this.openCreator}
+                    icon="fas fa-plus"
+                >
+                    Add student
+                </Button>
                 {this.state.mode !== 'none' ? (
                     <StudentAttendance
                         cancel={() => this.setMode('none')}
@@ -57,49 +55,10 @@ class SectionContainer extends Component {
                         section={this.props.match.params.sectionId}
                     />
                 ) : null}
-                <div className="create">
-                    <form>
-                        <Input
-                            handleChange={this.handleChange}
-                            label="Name"
-                            name="name"
-                            value={this.state.name}
-                        />
-                        <SelectGender
-                            handleChange={this.handleChange}
-                            label="Gender"
-                            value={this.state.gender}
-                        />
-                        <SelectLevel
-                            handleChange={this.handleChange}
-                            label="Current level"
-                            value={this.state.level}
-                        />
-                        <Button handleClick={this.handleCreate}>Create</Button>
-                    </form>
-                </div>
                 {this.renderStudents()}
             </div>
         );
     }
-
-    handleCreate = e => {
-        e.preventDefault();
-        const { gender, level, name } = this.state;
-        
-        if (gender && level && name) {
-            this.props.addStudent(name, gender, this.props.match.params.sectionId, level);
-            this.setState({
-                gender: '',
-                level: '',
-                name: ''
-            });
-        }
-    };
-
-    handleChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
-    };
 
     renderStudents = () => {
         const { students } = this.props;
@@ -121,6 +80,15 @@ class SectionContainer extends Component {
         return <div className="student-list">{rows}</div>;
     }
 
+    openCreator = () => {
+        return this.props.setModal((renderProps) =>
+            <StudentCreator
+                handleClose={renderProps.close}
+                section={this.props.match.params.sectionId}
+            />
+        );
+    }
+
     setMode = (mode) => {
         this.setState({ mode });
     }
@@ -134,12 +102,13 @@ const mapStateToProps = (state) => {
     return {
         students: state.students.list
     };
-};
+}
 
 const mapDispatchToProps = {
     addStudent,
     getStudentsBySection,
+    setModal,
     updateStudentLevel
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(SectionContainer);

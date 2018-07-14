@@ -1,10 +1,10 @@
-.section-creator {
+.creator {
     background: white;
     padding: 2em;
 }
 
-.section-creator,
-.section-creator form {
+.creator,
+.creator form {
     display: grid;
     grid-gap: 0.5em;
 }
