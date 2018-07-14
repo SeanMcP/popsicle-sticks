@@ -4,17 +4,21 @@ import { Link } from 'react-router-dom';
 import SelectLevel from '../common/SelectLevel';
 
 const StudentRow = (props) => (
-    <tr className="section-row">
-        <td className="name">{props.name}</td>
-        <td className="gender">{props.gender === 'female' ? '♀' : '♂'}</td>
-        <td>
+    <div className="student-row">
+        <div className="name">
+            <span>{props.name}</span>
+            <span className="gender">
+                {props.gender === 'female' ? '♀' : '♂'}
+            </span>
+        </div>
+        <div className="level">
             <SelectLevel
                 handleChange={(e) => props.handleChange(props.id, e.target.value)}
                 value={props.level}
             />
-        </td>
-        <td><Link to={`/student/${props.id}`}>View</Link></td>
-    </tr>
+        </div>
+        <div className="buttons"><Link to={`/student/${props.id}`}>View</Link></div>
+    </div>
 );
 
 StudentRow.propTypes = {

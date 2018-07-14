@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Button from '../components/atomic/Button';
+import Input from '../components/atomic/Input';
 import SelectGender from '../components/common/SelectGender';
 import SelectLevel from '../components/common/SelectLevel';
 import StudentAttendance from '../components/section/StudentAttendance';
@@ -30,7 +32,7 @@ class SectionContainer extends Component {
     render() {
         const { sectionId } = this.props.match.params;
         return (
-            <div className="class-container">
+            <div className="section container">
                 <Link to="/">Back</Link>
                 <br />
                 <h1>Class</h1>
@@ -56,19 +58,24 @@ class SectionContainer extends Component {
                     />
                 ) : null}
                 <div className="create">
-                    <form onSubmit={this.handleCreate}>
-                        <input name="name" onChange={this.handleChange} placeholder="Name" type="text" value={this.state.name} />
+                    <form>
+                        <Input
+                            handleChange={this.handleChange}
+                            label="Name"
+                            name="name"
+                            value={this.state.name}
+                        />
                         <SelectGender
                             handleChange={this.handleChange}
-                            label="Gender:"
+                            label="Gender"
                             value={this.state.gender}
                         />
                         <SelectLevel
                             handleChange={this.handleChange}
-                            label="Current level:"
+                            label="Current level"
                             value={this.state.level}
                         />
-                        <button>Create</button>
+                        <Button handleClick={this.handleCreate}>Create</Button>
                     </form>
                 </div>
                 {this.renderStudents()}
@@ -111,7 +118,7 @@ class SectionContainer extends Component {
                 />
             );
         }
-        return <table><tbody>{rows}</tbody></table>;
+        return <div className="student-list">{rows}</div>;
     }
 
     setMode = (mode) => {

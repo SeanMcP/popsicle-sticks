@@ -1,0 +1,12 @@
+.student-row {
+    align-items: center;
+    border-top: var(--border-white);
+    display: grid;
+    grid-gap: 0.5em;
+    grid-template-columns: 1fr 1fr 3em;
+    padding: 0.5em 0;
+}
+
+span.gender {
+    margin-left: 0.5em;
+}
