@@ -2,6 +2,7 @@
 import { STUDENT_ACTIONS } from '../actions';
 
 const initialState = {
+    all: {},
     attendance: {},
     list: {},
     student: {}
@@ -12,6 +13,10 @@ const StudentReducer = (state = initialState, action) => {
         case STUDENT_ACTIONS.SET_ATTENDANCE:
             return Object.assign({}, state, {
                 attendance: action.data
+            });
+        case STUDENT_ACTIONS.SET_ALL_STUDENTS:
+            return Object.assign({}, state, {
+                all: action.data
             });
         case STUDENT_ACTIONS.SET_STUDENT:
             return Object.assign({}, state, {

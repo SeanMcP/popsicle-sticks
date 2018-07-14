@@ -3,6 +3,7 @@ import db from '../firebase';
 import { setNotification } from '../actions';
 
 export const STUDENT_ACTIONS = {
+    SET_ALL_STUDENTS: 'SET_ALL_STUDENTS',
     SET_ATTENDANCE: 'SET_ATTENDANCE',
     SET_STUDENT: 'SET_STUDENT',
     SET_STUDENTS: 'SET_STUDENTS'
@@ -14,6 +15,29 @@ export const addStudent = (name, gender, sectionId, currentLevel) => {
         db
             .collection('students')
             .add({ name, gender, sections })
+            .then(() => {
+                dispatch(setNotification({
+                    type: 'SUCCESS',
+                    message: 'Successfully added student'
+                }));
+            })
+            .catch(error => {
+                dispatch(setNotification({
+                    type: 'FAILURE',
+                    message: 'Failed to add student',
+                    error
+                }));
+            });
+    };
+};
+
+export const addExistingStudent = (studentId, sectionId, currentLevel) => {
+    return (dispatch) => {
+        const section = `sections.${sectionId}`;
+        db
+            .collection('students')
+            .doc(studentId)
+            .update({ [section]: currentLevel })
             .then(() => {
                 dispatch(setNotification({
                     type: 'SUCCESS',
@@ -54,7 +78,7 @@ export const getAllStudents = () => {
                     output[doc.id] = doc.data();
                 });
                 return dispatch({
-                    type: STUDENT_ACTIONS.SET_STUDENTS,
+                    type: STUDENT_ACTIONS.SET_ALL_STUDENTS,
                     data: output
                 });
             });

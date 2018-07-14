@@ -23,7 +23,13 @@
 }
 
 .student-attendance
+.student-list
+.student.absent {
+    opacity: 0.3;
+}
+
+.student-attendance
 .buttons {
     display: grid;
-    grid-gap: 1em;
+    grid-gap: 0.5em;
 }

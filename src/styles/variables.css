@@ -26,6 +26,7 @@
     --border-radius: 0.25em;
 
     --blue:         var(--blue60);
+    --light-blue:   var(--blue40);
     --text:         var(--gray80);
     --text-gray:    var(--gray50);
 

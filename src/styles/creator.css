@@ -8,3 +8,8 @@
     display: grid;
     grid-gap: 0.5em;
 }
+
+.student-creator
+.mode-toggle {
+    text-align: right;
+}
