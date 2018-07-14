@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '../components/atomic/Button';
-import StudentCreator from '../components/section/StudentCreator';
 import StudentAttendance from '../components/section/StudentAttendance';
+import StudentCreator from '../components/section/StudentCreator';
 import StudentRow from '../components/section/StudentRow';
 import {
     addStudent,
@@ -13,13 +13,6 @@ import {
 } from '../actions';
 
 class SectionContainer extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            mode: 'none'
-        };
-    }
 
     componentDidMount() {
         this.props.getStudentsBySection(this.props.match.params.sectionId);
@@ -30,15 +23,13 @@ class SectionContainer extends Component {
         return (
             <div className="section container">
                 <Link to="/">Back</Link>
-                <br />
                 <h1>Class</h1>
-                Section Id: {sectionId}
-                <br />
+                <p>Section Id: {sectionId}</p>
                 <div className="tools">
-                    <Button handleClick={() => this.setMode('random')}>
+                    <Button handleClick={this.openAttendance('random')}>
                         Random Student Picker
                     </Button>
-                    <Button handleClick={() => this.setMode('group')}>
+                    <Button handleClick={this.openAttendance('group')}>
                         Group Maker
                     </Button>
                 </div>
@@ -48,15 +39,27 @@ class SectionContainer extends Component {
                 >
                     Add student
                 </Button>
-                {this.state.mode !== 'none' ? (
-                    <StudentAttendance
-                        cancel={() => this.setMode('none')}
-                        mode={this.state.mode}
-                        section={this.props.match.params.sectionId}
-                    />
-                ) : null}
                 {this.renderStudents()}
             </div>
+        );
+    }
+    openAttendance = (mode) => {
+        return () => this.props.setModal((renderProps) =>
+            <StudentAttendance
+                handleClose={renderProps.close}
+                mode={mode}
+                section={this.props.match.params.sectionId}
+                students={this.props.students}
+            />
+        );
+    }
+
+    openCreator = () => {
+        return this.props.setModal((renderProps) =>
+            <StudentCreator
+                handleClose={renderProps.close}
+                section={this.props.match.params.sectionId}
+            />
         );
     }
 
@@ -78,19 +81,6 @@ class SectionContainer extends Component {
             );
         }
         return <div className="student-list">{rows}</div>;
-    }
-
-    openCreator = () => {
-        return this.props.setModal((renderProps) =>
-            <StudentCreator
-                handleClose={renderProps.close}
-                section={this.props.match.params.sectionId}
-            />
-        );
-    }
-
-    setMode = (mode) => {
-        this.setState({ mode });
     }
 
     updateStudentLevel = (studentId, newLevel) => {
