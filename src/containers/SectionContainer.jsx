@@ -7,25 +7,28 @@ import StudentCreator from '../components/section/StudentCreator';
 import StudentRow from '../components/section/StudentRow';
 import {
     addStudent,
+    getSections,
     getStudentsBySection,
     removeStudentFromSection,
     setModal,
     updateStudentLevel
 } from '../actions';
+import { ObjVal } from '../utils';
 
 class SectionContainer extends Component {
 
     componentDidMount() {
         this.props.getStudentsBySection(this.props.match.params.sectionId);
+        if (!ObjVal(this.props.info)) {
+            this.props.getSections();
+        }
     }
 
     render() {
-        const { sectionId } = this.props.match.params;
         return (
             <div className="section container">
                 <Link to="/">Back</Link>
-                <h1>Class</h1>
-                <p>Section Id: {sectionId}</p>
+                <h1>{this.renderTitle()}</h1>
                 <div className="tools">
                     <Button handleClick={this.openAttendance('random')}>
                         Random Student Picker
@@ -89,19 +92,27 @@ class SectionContainer extends Component {
         return <div className="student-list">{rows}</div>;
     }
 
+    renderTitle = () => {
+        if (this.props.info && this.props.info.name) {
+            return this.props.info.name;
+        }
+    }
+
     updateStudentLevel = (studentId, newLevel) => {
         return this.props.updateStudentLevel(studentId, this.props.match.params.sectionId, newLevel);
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
+        info: state.sections.list[ownProps.match.params.sectionId],
         students: state.students.list
     };
 }
 
 const mapDispatchToProps = {
     addStudent,
+    getSections,
     getStudentsBySection,
     removeStudentFromSection,
     setModal,
