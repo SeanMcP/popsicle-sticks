@@ -1,5 +1,5 @@
 export const ObjVal = (obj) => {
-    if (Object.keys(obj).length) {
+    if (obj && Object.keys(obj).length) {
         return true;
     }
     return false;
