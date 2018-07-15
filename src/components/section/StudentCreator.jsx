@@ -106,9 +106,9 @@ class StudentCreator extends Component {
 
     handleCreate = e => {
         e.preventDefault();
-        const { gender, isNew, level, name } = this.state;
+        const { gender, level, name, newStudent } = this.state;
 
-        if (isNew) {
+        if (newStudent) {
             if (gender && level && name) {
                 this.props.addStudent(name, gender, this.props.section, level);
                 this.setState({
