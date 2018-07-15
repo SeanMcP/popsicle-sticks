@@ -6,7 +6,9 @@ import SelectLevel from '../common/SelectLevel';
 const StudentRow = (props) => (
     <div className="student-row">
         <div className="name">
-            <span>{props.name}</span>
+            <Link to={`/student/${props.id}`}>
+                {props.name}
+            </Link>
             <span className="gender">
                 {props.gender === 'female' ? '♀' : '♂'}
             </span>
@@ -17,13 +19,19 @@ const StudentRow = (props) => (
                 value={props.level}
             />
         </div>
-        <div className="buttons"><Link to={`/student/${props.id}`}>View</Link></div>
+        <div className="buttons">
+            {/* <Link to={`/student/${props.id}`}>View</Link> */}
+            <div className="faux-link" onClick={() => props.handleRemove(props.id)}>
+                Remove
+            </div>
+        </div>
     </div>
 );
 
 StudentRow.propTypes = {
     gender: PropTypes.string.isRequired,
     handleChange: PropTypes.func.isRequired,
+    handleRemove: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,
     level: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired

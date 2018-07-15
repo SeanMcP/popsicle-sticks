@@ -8,6 +8,7 @@ import StudentRow from '../components/section/StudentRow';
 import {
     addStudent,
     getStudentsBySection,
+    removeStudentFromSection,
     setModal,
     updateStudentLevel
 } from '../actions';
@@ -63,6 +64,10 @@ class SectionContainer extends Component {
         );
     }
 
+    removeStudent = (studentId) => {
+        return this.props.removeStudentFromSection(studentId, this.props.match.params.sectionId);
+    }
+
     renderStudents = () => {
         const { students } = this.props;
         const { sectionId } = this.props.match.params;
@@ -73,6 +78,7 @@ class SectionContainer extends Component {
                 <StudentRow
                     gender={student.gender}
                     handleChange={this.updateStudentLevel}
+                    handleRemove={this.removeStudent}
                     id={id}
                     key={id}
                     level={student.sections[sectionId]}
@@ -97,6 +103,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     addStudent,
     getStudentsBySection,
+    removeStudentFromSection,
     setModal,
     updateStudentLevel
 }

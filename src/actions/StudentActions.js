@@ -103,6 +103,31 @@ export const getStudentsBySection = (sectionId) => {
     };
 };
 
+export const removeStudentFromSection = (studentId, sectionId) => {
+    return (dispatch) => {
+        const section = `sections.${sectionId}`;
+        db
+            .collection('students')
+            .doc(studentId)
+            .update({
+                [section]: ''
+            })
+            .then(() => {
+                dispatch(setNotification({
+                    type: 'SUCCESS',
+                    message: 'Successfully removed student'
+                }));
+            })
+            .catch(error => {
+                dispatch(setNotification({
+                    type: 'FAILURE',
+                    message: 'Failed to remove student',
+                    error
+                }));
+            });
+    };
+};
+
 export const setAttendance = (sectionId, attendanceArray) => {
     return (dispatch, getState) => {
         const { attendance } = getState().students;
