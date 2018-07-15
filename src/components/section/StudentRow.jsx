@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Gender from '../common/Gender';
 import SelectLevel from '../common/SelectLevel';
 
 const StudentRow = (props) => (
@@ -9,9 +10,7 @@ const StudentRow = (props) => (
             <Link to={`/student/${props.id}`}>
                 {props.name}
             </Link>
-            <span className="gender">
-                {props.gender === 'female' ? '♀' : '♂'}
-            </span>
+            <Gender type={props.gender} />
         </div>
         <div className="level">
             <SelectLevel
