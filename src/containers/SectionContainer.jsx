@@ -47,6 +47,7 @@ class SectionContainer extends Component {
             </div>
         );
     }
+    
     openAttendance = (mode) => {
         return () => this.props.setModal((renderProps) =>
             <StudentAttendance

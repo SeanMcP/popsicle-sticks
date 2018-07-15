@@ -1,30 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Gender from '../components/common/Gender';
+import SectionRow from '../components/student/SectionRow';
 import {
     getSections,
-    getStudent
+    getStudent,
+    removeStudentFromSection,
+    updateStudentLevel
 } from '../actions';
 
 class StudentContainer extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {};
+    }
     componentDidMount() {
         this.props.getSections();
         this.props.getStudent(this.props.match.params.studentId);
     }
+
     render() {
-        const { studentId } = this.props.match.params;
         return (
-            <div className="student-container">
+            <div className="student-container container">
                 <Link to="/">Back</Link>
-                <br />
-                <h1>Student</h1>
-                Student Id: {studentId}
-                <br />
-                <h2>{this.props.student.name}</h2>
-                <p>{this.props.student.gender}</p>
+                <h1>{this.props.student.name}<Gender type={this.props.student.gender}/></h1>
                 {this.renderLevels()}
             </div>
         );
+    }
+
+    removeStudent = (sectionId) => {
+        return this.props.removeStudentFromSection(this.props.match.params.studentId, sectionId);
     }
 
     renderLevels = () => {
@@ -32,15 +40,26 @@ class StudentContainer extends Component {
         const levelList = [];
         for (const sectionId in sections) {
             const section = this.props.sections[sectionId];
-            if (section) {
+            if (section && sections[sectionId]) {
                 levelList.push(
-                    <li key={sectionId}>
-                        <Link to={`/section/${sectionId}`}>{section.name}</Link> - {section.type} - {sections[sectionId]}
-                    </li>
+                    <SectionRow
+                        handleChange={this.updateStudentLevel}
+                        handleRemove={this.removeStudent}
+                        id={sectionId}
+                        level={sections[sectionId]}
+                        name={section.name}
+                    />
                 );
             }
         }
-        return <ul>{levelList}</ul>
+        if (levelList.length) {
+            return <ul>{levelList}</ul>
+        }
+        return <div>This student doesn't have any sections.</div>
+    }
+
+    updateStudentLevel = (sectionId, newLevel) => {
+        return this.props.updateStudentLevel(this.props.match.params.studentId, sectionId, newLevel);
     }
 }
 
@@ -53,7 +72,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     getSections,
-    getStudent
+    getStudent,
+    removeStudentFromSection,
+    updateStudentLevel
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentContainer);

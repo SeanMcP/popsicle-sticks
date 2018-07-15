@@ -1,16 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Gender from '../common/Gender';
 import SelectLevel from '../common/SelectLevel';
 
-const StudentRow = (props) => (
-    <div className="student-row">
+const SectionRow = (props) => (
+    <div className="section-row">
         <div className="name">
-            <Link to={`/student/${props.id}`}>
+            <Link to={`/section/${props.id}`}>
                 {props.name}
             </Link>
-            <Gender type={props.gender} />
         </div>
         <div className="level">
             <SelectLevel
@@ -26,8 +24,7 @@ const StudentRow = (props) => (
     </div>
 );
 
-StudentRow.propTypes = {
-    gender: PropTypes.string.isRequired,
+SectionRow.propTypes = {
     handleChange: PropTypes.func.isRequired,
     handleRemove: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,
@@ -35,4 +32,4 @@ StudentRow.propTypes = {
     name: PropTypes.string.isRequired
 };
 
-export default StudentRow;
+export default SectionRow;
