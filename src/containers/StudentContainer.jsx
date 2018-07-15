@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Gender from '../components/common/Gender';
+import WithHeroLayout from '../components/layout/WithHeroLayout';
 import SectionRow from '../components/student/SectionRow';
 import {
     getSections,
@@ -23,11 +23,14 @@ class StudentContainer extends Component {
 
     render() {
         return (
-            <div className="student-container container">
-                <Link to="/">Back</Link>
-                <h1>{this.props.student.name}<Gender type={this.props.student.gender}/></h1>
-                {this.renderLevels()}
-            </div>
+            <WithHeroLayout
+                heading={`${this.props.student.name} ${this.props.student.gender === 'female' ? '♀' : '♂'}`}
+            >
+                <div className="student-container container">
+                    <Link to="/">Back</Link>
+                    {this.renderLevels()}
+                </div>
+            </WithHeroLayout>
         );
     }
 

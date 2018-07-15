@@ -1,0 +1,5 @@
+.hero {
+    background: var(--blue90);
+    color: white;
+    padding: 2em 0;
+}

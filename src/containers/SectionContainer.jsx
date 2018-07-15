@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '../components/atomic/Button';
+import WithHeroLayout from '../components/layout/WithHeroLayout';
 import StudentAttendance from '../components/section/StudentAttendance';
 import StudentCreator from '../components/section/StudentCreator';
 import StudentRow from '../components/section/StudentRow';
@@ -26,25 +27,26 @@ class SectionContainer extends Component {
 
     render() {
         return (
-            <div className="section container">
-                <Link to="/">Back</Link>
-                <h1>{this.renderTitle()}</h1>
-                <div className="tools">
-                    <Button handleClick={this.openAttendance('random')}>
-                        Random Student Picker
+            <WithHeroLayout heading={this.renderTitle()}>
+                <div className="section container">
+                    <Link to="/">Back</Link>
+                    <div className="tools">
+                        <Button handleClick={this.openAttendance('random')}>
+                            Random Student Picker
+                        </Button>
+                        <Button handleClick={this.openAttendance('group')}>
+                            Group Maker
+                        </Button>
+                    </div>
+                    <Button
+                        handleClick={this.openCreator}
+                        icon="fas fa-plus"
+                    >
+                        Add student
                     </Button>
-                    <Button handleClick={this.openAttendance('group')}>
-                        Group Maker
-                    </Button>
+                    {this.renderStudents()}
                 </div>
-                <Button
-                    handleClick={this.openCreator}
-                    icon="fas fa-plus"
-                >
-                    Add student
-                </Button>
-                {this.renderStudents()}
-            </div>
+            </WithHeroLayout>
         );
     }
     
