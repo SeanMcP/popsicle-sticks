@@ -41,3 +41,28 @@ export const getSections = () => {
         });
     }
 }
+
+export const updateSection = (id, name, type) => {
+    return (dispatch) => {
+        db
+            .collection('sections')
+            .doc(id)
+            .update({
+                'name': name,
+                'type': type
+            })
+            .then(() => {
+                dispatch(setNotification({
+                    type: 'SUCCESS',
+                    message: 'Successfully updated section'
+                }));
+            })
+            .catch(error => {
+                dispatch(setNotification({
+                    type: 'FAILURE',
+                    message: 'Failed to update section',
+                    error
+                }));
+            });
+    };
+};

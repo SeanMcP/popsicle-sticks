@@ -37,7 +37,7 @@ class SectionCreator extends Component {
                     <Button
                         className="full"
                         handleClick={this.handleCreate}
-                        disabled={!(this.state.name && this.state.level && this.state.type)}
+                        disabled={!(this.state.name && this.state.type)}
                     >
                         Create
                     </Button>
@@ -56,8 +56,7 @@ class SectionCreator extends Component {
         e.preventDefault();
         const { name, type } = this.state;
         this.props.addSection(name, type);
-        // TODO: Only clear on success
-        return this.setState({ name: '', type: '' }, this.props.handleClose);
+        return this.props.handleClose();
     };
 
     handleChange = (e) => {

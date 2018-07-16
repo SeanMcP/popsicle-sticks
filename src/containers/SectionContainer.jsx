@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '../components/atomic/Button';
-import WithHeroLayout from '../components/layout/WithHeroLayout';
+import Icon from '../components/atomic/Icon';
+import SectionSettings from '../components/section/SectionSettings';
 import StudentAttendance from '../components/section/StudentAttendance';
 import StudentCreator from '../components/section/StudentCreator';
 import StudentRow from '../components/section/StudentRow';
+import WithHeroLayout from '../components/layout/WithHeroLayout';
 import {
     addStudent,
     getSections,
@@ -27,7 +29,10 @@ class SectionContainer extends Component {
 
     render() {
         return (
-            <WithHeroLayout heading={this.renderTitle()}>
+            <WithHeroLayout
+                button={<Icon handleClick={this.openSettings} icon="fas fa-cog fa-lg" />}
+                heading={this.renderTitle()}
+            >
                 <div className="section container">
                     <Link to="/">Back</Link>
                     <div className="tools">
@@ -66,6 +71,17 @@ class SectionContainer extends Component {
             <StudentCreator
                 handleClose={renderProps.close}
                 section={this.props.match.params.sectionId}
+            />
+        );
+    }
+
+    openSettings = () => {
+        return this.props.setModal((renderProps) =>
+            <SectionSettings
+                handleClose={renderProps.close}
+                id={this.props.match.params.sectionId}
+                name={this.props.info.name}
+                type={this.props.info.type}
             />
         );
     }

@@ -38,7 +38,7 @@ a:hover,
     color: var(--light-blue);
 }
 
-.icon {
+.click {
     cursor: pointer;
 }
 
