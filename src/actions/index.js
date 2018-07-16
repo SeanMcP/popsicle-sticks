@@ -1,5 +1,5 @@
 // actions/index.js
 
 export * from './NotificationActions';
-export * from './SectionActions2';
+export * from './SectionActions';
 export * from './StudentActions';
