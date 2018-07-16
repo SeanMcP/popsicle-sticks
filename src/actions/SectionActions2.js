@@ -6,11 +6,11 @@ export const SECTION_ACTIONS = {
     SET_SECTIONS: 'SET_SECTIONS'
 };
 
-export const addSection = (name, type, description) => {
+export const addSection = (name, type) => {
     return (dispatch) => {
         db
             .collection('sections')
-            .add({ name, type, description })
+            .add({ name, type })
             .then(() => {
                 dispatch(setNotification({
                     type: 'SUCCESS',
