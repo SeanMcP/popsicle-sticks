@@ -5,14 +5,16 @@ import Hero from './Hero';
 const WithHeroLayout = (props) => (
     <Fragment>
         <Hero
+            button={props.button}
+            className={props.className}
             heading={props.heading}
-            className={props.heroClassName}
         />
         {props.children}
     </Fragment>
 )
 
 WithHeroLayout.propTypes = {
+    button: PropTypes.element,
     className: PropTypes.string,
     heading: PropTypes.string.isRequired
 }
