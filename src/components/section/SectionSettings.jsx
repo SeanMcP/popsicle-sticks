@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Button from '../atomic/Button';
 import Input from '../atomic/Input';
-import Select from '../atomic/Select';
+import SelectType from '../common/SelectType';
 import { updateSection } from '../../actions';
 
 class SectionSettings extends Component {
@@ -26,11 +26,9 @@ class SectionSettings extends Component {
                     name="name"
                     value={this.state.name}
                 />
-                <Select
+                <SelectType
                     handleChange={this.handleChange}
                     label="Type"
-                    name="type"
-                    options={['math', 'science', 'social studies', 'language arts', 'general education'].sort()}
                     value={this.state.type}
                 />
                 <Button
