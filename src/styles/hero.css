@@ -1,5 +1,6 @@
 .hero {
     background: var(--blue90);
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.2);
     color: white;
     padding: 2em 0;
 }
@@ -19,4 +20,20 @@
 .hero
 .icon:hover {
     opacity: 1;
+}
+
+.hero.type-social_studies {
+    background: var(--dark-red);
+}
+.hero.type-general_education {
+    background: var(--dark-orange);
+}
+.hero.type-language_arts {
+    background: var(--dark-teal);
+}
+.hero.type-math {
+    background: var(--dark-purple);
+}
+.hero.type-science {
+    background: var(--dark-green);
 }

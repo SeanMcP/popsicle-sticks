@@ -30,6 +30,7 @@ class SectionContainer extends Component {
     render() {
         return (
             <WithHeroLayout
+                className={this.getTypeClass()}
                 button={<Icon handleClick={this.openSettings} icon="fas fa-cog fa-lg" />}
                 heading={this.renderTitle()}
             >
@@ -53,6 +54,14 @@ class SectionContainer extends Component {
                 </div>
             </WithHeroLayout>
         );
+    }
+    
+    getTypeClass = () => {
+        const { info } = this.props;
+        if (info.type) {
+            return `type-${info.type.replace(/ /g, '_')}`;
+        }
+        return 'type-default';
     }
     
     openAttendance = (mode) => {

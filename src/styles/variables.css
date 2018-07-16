@@ -30,6 +30,13 @@
     --text:         var(--gray80);
     --text-gray:    var(--gray50);
 
+    --dark-red:     #B71C1C;
+    --dark-orange:  #F57F17;
+    --dark-green:   #1B5E20;
+    --dark-teal:    #004D40;
+    --dark-blue:    var(--blue90);
+    --dark-purple:  #311B92;
+
     --shadow:       0 0 0.125em rgba(0, 0, 0, 0.125);
 
     --an-md:        200ms ease-in-out;
