@@ -140,6 +140,31 @@ export const setAttendance = (sectionId, attendanceArray) => {
     };
 };
 
+export const updateStudentInfo = (id, name, gender) => {
+    return (dispatch) => {
+        db
+            .collection('students')
+            .doc(id)
+            .update({
+                'name': name,
+                'gender': gender
+            })
+            .then(() => {
+                dispatch(setNotification({
+                    type: 'SUCCESS',
+                    message: 'Successfully updated student'
+                }));
+            })
+            .catch(error => {
+                dispatch(setNotification({
+                    type: 'FAILURE',
+                    message: 'Failed to update student',
+                    error
+                }));
+            });
+    };
+};
+
 export const updateStudentLevel = (studentId, sectionId, newLevel) => {
     return (dispatch) => {
         db

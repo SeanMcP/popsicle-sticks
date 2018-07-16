@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import WithHeroLayout from '../components/layout/WithHeroLayout';
+import Icon from '../components/atomic/Icon';
 import SectionRow from '../components/student/SectionRow';
+import StudentSettings from '../components/student/StudentSettings';
+import WithHeroLayout from '../components/layout/WithHeroLayout';
 import {
     getSections,
     getStudent,
     removeStudentFromSection,
+    setModal,
     updateStudentLevel
 } from '../actions';
 
@@ -24,6 +27,7 @@ class StudentContainer extends Component {
     render() {
         return (
             <WithHeroLayout
+                button={<Icon handleClick={this.openSettings} icon="fas fa-cog fa-lg" />}
                 heading={`${this.props.student.name} ${this.props.student.gender === 'female' ? '♀' : '♂'}`}
             >
                 <div className="student-container container">
@@ -31,6 +35,17 @@ class StudentContainer extends Component {
                     {this.renderLevels()}
                 </div>
             </WithHeroLayout>
+        );
+    }
+
+    openSettings = () => {
+        return this.props.setModal((renderProps) =>
+            <StudentSettings
+                handleClose={renderProps.close}
+                id={this.props.match.params.studentId}
+                name={this.props.student.name}
+                gender={this.props.student.gender}
+            />
         );
     }
 
@@ -77,6 +92,7 @@ const mapDispatchToProps = {
     getSections,
     getStudent,
     removeStudentFromSection,
+    setModal,
     updateStudentLevel
 };
 
