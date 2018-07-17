@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '../components/atomic/Button';
 import Icon from '../components/atomic/Icon';
-import SectionCreator from '../components/schedule/SectionCreator';
+// import SectionCreator from '../components/schedule/SectionCreator';
 import { getSections, setModal } from '../actions';
 
 class ScheduleContainer extends Component {
@@ -48,9 +48,7 @@ class ScheduleContainer extends Component {
     }
 
     openCreator = () => {
-        return this.props.setModal((renderProps) =>
-            <SectionCreator handleClose={renderProps.close} />
-        );
+        return this.props.setModal('SectionCreator');
     }
 }
 

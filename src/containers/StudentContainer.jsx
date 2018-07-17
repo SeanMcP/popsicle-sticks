@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Icon from '../components/atomic/Icon';
 import SectionRow from '../components/student/SectionRow';
-import StudentSettings from '../components/student/StudentSettings';
 import WithHeroLayout from '../components/layout/WithHeroLayout';
 import {
     getSections,
@@ -39,13 +38,12 @@ class StudentContainer extends Component {
     }
 
     openSettings = () => {
-        return this.props.setModal((renderProps) =>
-            <StudentSettings
-                handleClose={renderProps.close}
-                id={this.props.match.params.studentId}
-                name={this.props.student.name}
-                gender={this.props.student.gender}
-            />
+        return this.props.setModal(
+            'StudentSettings', {
+                id: this.props.match.params.studentId,
+                name: this.props.student.name,
+                gender: this.props.student.gender
+            }
         );
     }
 

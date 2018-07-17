@@ -1,21 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import ModalContent from '../modal';
 import { clearModal } from '../../actions';
 
 const Modal = (props) => {
-    if (!props.content) {
+    if (!props.modalName) {
         return null;
     }
-    const renderProps = {
-        close: props.clearModal
-    };
+    const Content = ModalContent[props.modalName];
     return (
         <div className="modal">
             <div className="overlay" onClick={props.clearModal} />
             <div className="content">
-                {typeof props.content === 'function'
-                    ? props.content(renderProps)
-                    : props.content}
+                <Content {...props.modalProps} handleClose={props.clearModal}/>
             </div>
         </div>
     );
@@ -23,7 +20,8 @@ const Modal = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        content: state.notifications.modal
+        modalName: state.notifications.modalName,
+        modalProps: state.notifications.modalProps,
     }
 }
 

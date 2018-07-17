@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '../components/atomic/Button';
 import Icon from '../components/atomic/Icon';
-import SectionSettings from '../components/section/SectionSettings';
-import StudentAttendance from '../components/section/StudentAttendance';
-import StudentCreator from '../components/section/StudentCreator';
 import StudentRow from '../components/section/StudentRow';
 import WithHeroLayout from '../components/layout/WithHeroLayout';
 import {
@@ -58,40 +55,38 @@ class SectionContainer extends Component {
     
     getTypeClass = () => {
         const { info } = this.props;
-        if (info.type) {
+        if (info && info.type) {
             return `type-${info.type.replace(/ /g, '_')}`;
         }
         return 'type-default';
     }
     
     openAttendance = (mode) => {
-        return () => this.props.setModal((renderProps) =>
-            <StudentAttendance
-                handleClose={renderProps.close}
-                mode={mode}
-                section={this.props.match.params.sectionId}
-                students={this.props.students}
-            />
+        return () => this.props.setModal(
+            'StudentAttendance', 
+            {
+                mode,
+                section: this.props.match.params.sectionId,
+                students: this.props.students
+            }
         );
     }
 
     openCreator = () => {
-        return this.props.setModal((renderProps) =>
-            <StudentCreator
-                handleClose={renderProps.close}
-                section={this.props.match.params.sectionId}
-            />
+        return this.props.setModal(
+            'StudentCreator',
+            { section: this.props.match.params.sectionId }
         );
     }
 
     openSettings = () => {
-        return this.props.setModal((renderProps) =>
-            <SectionSettings
-                handleClose={renderProps.close}
-                id={this.props.match.params.sectionId}
-                name={this.props.info.name}
-                type={this.props.info.type}
-            />
+        return this.props.setModal(
+            'SectionSettings',
+            {
+                id: this.props.match.params.sectionId,
+                name: this.props.info.name,
+                type: this.props.info.type
+            }
         );
     }
 

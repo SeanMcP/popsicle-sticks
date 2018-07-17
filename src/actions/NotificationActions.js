@@ -14,11 +14,14 @@ export const clearModal = () => {
     }
 };
 
-export const setModal = (modal) => {
+export const setModal = (name, props) => {
     return (dispatch) => {
         dispatch({
             type: NOTIFICATION_ACTIONS.SET_MODAL,
-            data: { modal }
+            data: {
+                name,
+                props
+            }
         });
     }
 };
