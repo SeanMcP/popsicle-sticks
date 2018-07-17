@@ -14,7 +14,7 @@
 
 .select-menu
 .value {
-    color: var(--text-gray);
+    color: var(--light-text);
     flex-grow: 1;
 }
 

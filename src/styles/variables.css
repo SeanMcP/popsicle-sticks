@@ -28,16 +28,19 @@
     --blue:         var(--blue60);
     --light-blue:   var(--blue40);
     --text:         var(--gray80);
-    --text-gray:    var(--gray50);
+    --light-text:    var(--gray50);
 
     --dark-red:     #B71C1C;
+    --red:          #F44336;
     --dark-orange:  #F57F17;
+    --green:        #4CAF50;
     --dark-green:   #1B5E20;
     --dark-teal:    #004D40;
     --dark-blue:    var(--blue90);
     --dark-purple:  #311B92;
 
     --shadow:       0 0 0.125em rgba(0, 0, 0, 0.125);
+    --dark-shadow:  0 0 0.25em rgba(0, 0, 0, 0.25);
 
     --an-md:        200ms ease-in-out;
 

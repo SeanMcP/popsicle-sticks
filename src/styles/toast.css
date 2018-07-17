@@ -1,0 +1,48 @@
+.toast {
+    align-items: center;
+    animation: fade-in var(--an-md);
+    background: white;
+    border-left: 0.5em solid var(--light-text);
+    border-radius: var(--border-radius);
+    bottom: 2em;
+    box-shadow: var(--dark-shadow);
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: min-content 1fr;
+    left: 50%;
+    padding: 1em;
+    position: fixed;
+    transform: translateX(-50%);
+    transition: all var(--an-md);
+    width: 15em;
+}
+
+.toast
+.message {
+    line-height: 125%;
+}
+
+.toast
+.icon {
+    color: var(--light-text);
+}
+
+.toast.type-SUCCESS {
+    border-left-color: var(--green);
+}
+.toast.type-SUCCESS
+.icon {
+    color: var(--green);
+}
+
+.toast.type-FAILURE {
+    border-left-color: var(--red);
+}
+.toast.type-FAILURE
+.icon {
+    color: var(--red);
+}
+
+/* .toast.closing {
+    opacity: 0;
+} */
