@@ -6,6 +6,7 @@ const initialState = {
     modalProps: {},
     notificationMessage: '',
     notificationType: '',
+    notifactionError: ''
 };
 
 const NotificationReducer = (state = initialState, action) => {
@@ -15,6 +16,12 @@ const NotificationReducer = (state = initialState, action) => {
                 modalName: '',
                 modalProps: {}
             });
+        case NOTIFICATION_ACTIONS.CLEAR_NOTIFICATION:
+            return Object.assign({}, state, {
+                notificationMessage: '',
+                notificationType: '',
+                notifactionError: ''
+            });
         case NOTIFICATION_ACTIONS.SET_MODAL:
             return Object.assign({}, state, {
                 modalName: action.data.name,
@@ -23,7 +30,8 @@ const NotificationReducer = (state = initialState, action) => {
         case NOTIFICATION_ACTIONS.SET_NOTIFICATION:
             return Object.assign({}, state, {
                 notificationMessage: action.data.message,
-                notificationType: action.data.type
+                notificationType: action.data.type,
+                notifactionError: action.data.error
             });
         default:
             return state; 
