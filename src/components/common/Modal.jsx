@@ -1,21 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ModalContent from '../modal';
 import { clearModal } from '../../actions';
 
-const Modal = (props) => {
-    if (!props.modalName) {
-        return null;
+class Modal extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isClosing: false
+        }
     }
-    const Content = ModalContent[props.modalName];
-    return (
-        <div className="modal">
-            <div className="overlay" onClick={props.clearModal} />
-            <div className="content">
-                <Content {...props.modalProps} handleClose={props.clearModal}/>
+
+    render() {
+        const Content = ModalContent[this.props.modalName];
+
+        if (!this.props.modalName || !Content) {
+            return null;
+        }
+
+        return (
+            <div className={`modal ${this.state.isClosing ? 'closing' : ''}`}>
+                <div className="overlay" onClick={this.handleClose} />
+                <div className="content">
+                    <Content {...this.props.modalProps} handleClose={this.handleClose}/>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
+
+    handleClose = () => {
+        this.setState({ isClosing: true });
+        setTimeout(() => 
+            this.setState({ isClosing: false }, this.props.clearModal)
+        , 200);
+    }
 }
 
 const mapStateToProps = (state) => {

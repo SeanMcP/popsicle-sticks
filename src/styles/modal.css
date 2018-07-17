@@ -5,9 +5,11 @@
     display: flex;
     justify-content: center;
     left: 0;
+    opacity: 1;
     position: fixed;
     right: 0;
     top: 0;
+    transition: all var(--an-md);
 }
 
 .modal > .overlay {
@@ -25,4 +27,8 @@
     padding: 2em;
     width: 100%;
     z-index: 2;
+}
+
+.modal.closing {
+    opacity: 0;
 }
