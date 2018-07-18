@@ -7,7 +7,7 @@
 }
 
 .select-menu.open {
-    border-color: var(--blue40);
+    border-color: var(--blue400);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
@@ -61,5 +61,5 @@ i {
 .select-menu
 .menu
 .option:hover {
-    background: var(--blue5);
+    background: var(--blue50);
 }

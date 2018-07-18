@@ -13,11 +13,11 @@
 }
 
 .button:hover {
-    background: var(--blue50);
+    background: var(--blue500);
 }
 
 .button:active {
-    background: var(--blue70);
+    background: var(--blue700);
 }
 
 .button i {
@@ -38,19 +38,16 @@
 }
 
 .button.secondary:hover {
-    border-color: var(--blue50);
-    color: var(--blue50);
+    border-color: var(--blue500);
+    color: var(--blue500);
 }
 
 .button.secondary:active {
-    border-color: var(--blue70);
-    color: var(--blue70);
+    border-color: var(--blue700);
+    color: var(--blue700);
 }
 
-.button.danger {
-    background: var(--red);
-}
+.button.danger { background: var(--red500) }
+.button.danger:hover { background: var(--red400) }
 
-.button.warning {
-    background: var(--orange);
-}
+.button.warning { background: var(--orange500) }
