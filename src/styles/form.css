@@ -3,8 +3,8 @@ input, .input {
     border: var(--border-white);
     border-radius: var(--border-radius);
     box-shadow: inset 1px 1px 4px var(--gray300);
-    font-size: 1em;
-    padding: 0.5em;
+    font-size: 1rem;
+    padding: 0.5rem;
     transition: all var(--an-md);
 }
 

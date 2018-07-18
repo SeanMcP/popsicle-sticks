@@ -1,6 +1,6 @@
 .app-header {
     background: var(--blue600);
     color: white;
-    font-size: 1.25em;
-    padding: 1em;
+    font-size: 1.25rem;
+    padding: 1rem;
 }

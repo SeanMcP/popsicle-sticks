@@ -1,6 +1,6 @@
 .student-attendance {
     background: white;
-    padding: 2em;
+    padding: 2rem;
 }
 
 .student-attendance
@@ -8,18 +8,18 @@
     background: var(--gray100);
     box-shadow: inset 2px 2px 4px var(--gray400);
     display: grid;
-    grid-gap: 0.5em;
+    grid-gap: 0.5rem;
     grid-template-columns: repeat(2, 1fr);
-    height: 15em;
+    height: 15rem;
     overflow: scroll;
-    padding: 0.5em;
+    padding: 0.5rem;
 }
 
 .student-attendance
 .student-list
 .student {
     cursor: pointer;
-    padding: 0.5em;
+    padding: 0.5rem;
 }
 
 .student-attendance
@@ -31,5 +31,5 @@
 .student-attendance
 .buttons {
     display: grid;
-    grid-gap: 0.5em;
+    grid-gap: 0.5rem;
 }

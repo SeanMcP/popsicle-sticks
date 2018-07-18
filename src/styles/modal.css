@@ -24,7 +24,7 @@
 
 .modal .content {
     max-width: var(--mobile);
-    padding: 2em;
+    padding: 2rem;
     width: 100%;
     z-index: 2;
 }

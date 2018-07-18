@@ -3,14 +3,14 @@
     align-items: center;
     border-top: var(--border-white);
     display: grid;
-    grid-gap: 0.5em;
+    grid-gap: 0.5rem;
     grid-template-columns: 1fr 1fr min-content;
-    padding: 0.5em 0;
+    padding: 0.5rem 0;
 }
 
 .student-row
 span.gender,
 .section-row
 span.gender {
-    margin-left: 0.5em;
+    margin-left: 0.5rem;
 }

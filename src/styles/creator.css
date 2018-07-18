@@ -1,12 +1,12 @@
 .creator {
     background: white;
-    padding: 2em;
+    padding: 2rem;
 }
 
 .creator,
 .creator form {
     display: grid;
-    grid-gap: 0.5em;
+    grid-gap: 0.5rem;
 }
 
 .student-creator

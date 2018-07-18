@@ -2,7 +2,7 @@
     background: var(--blue900);
     box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.2);
     color: white;
-    padding: 2em 0;
+    padding: 2rem 0;
     transition: all var(--an-md);
 }
 

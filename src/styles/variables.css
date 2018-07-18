@@ -2,7 +2,7 @@
     /* Borders by background color */
     --border-white: 1px solid var(--gray300);
 
-    --border-radius: 0.25em;
+    --border-radius: 0.25rem;
 
     --blue:         var(--blue600);
     --light-blue:   var(--blue400);
@@ -18,8 +18,8 @@
     --dark-blue:    var(--blue900);
     --dark-purple:  var(--purple900);
 
-    --shadow:       0 0 0.125em rgba(0, 0, 0, 0.125);
-    --dark-shadow:  0 0 0.25em rgba(0, 0, 0, 0.25);
+    --shadow:       0 0 0.125rem rgba(0, 0, 0, 0.125);
+    --dark-shadow:  0 0 0.25rem rgba(0, 0, 0, 0.25);
 
     --an-md:        200ms ease-in-out;
 
