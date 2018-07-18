@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import {
+    connectRouter,
+    ConnectedRouter,
+    routerMiddleware
+} from 'connected-react-router';
 import registerServiceWorker from './registerServiceWorker';
 
 // Redux imports
@@ -19,19 +25,29 @@ import StudentContainer from './containers/StudentContainer';
 import './styles/_styles.css';
 
 // Redux
-const store = createStore(reducer, applyMiddleware(logger, reduxThunk));
+const history = createBrowserHistory();
+const store = createStore(
+    connectRouter(history)(reducer),
+    applyMiddleware(
+        routerMiddleware(history),
+        logger,
+        reduxThunk
+    )
+);
 
 ReactDOM.render(
     <BrowserRouter>
         <Provider store={store}>
-            <App>
-                <Switch>
-                    <Route path='/section/:sectionId/random' component={RandomContainer}/>
-                    <Route path='/section/:sectionId' component={SectionContainer}/>
-                    <Route path='/student/:studentId' component={StudentContainer}/>
-                    <Route exact path='/' component={ScheduleContainer}/>
-                </Switch>
-            </App>
+            <ConnectedRouter history={history}>
+                <App>
+                    <Switch>
+                        <Route path='/section/:sectionId/random' component={RandomContainer}/>
+                        <Route path='/section/:sectionId' component={SectionContainer}/>
+                        <Route path='/student/:studentId' component={StudentContainer}/>
+                        <Route exact path='/' component={ScheduleContainer}/>
+                    </Switch>
+                </App>
+            </ConnectedRouter>
         </Provider>
     </BrowserRouter>
     , document.getElementById('root'));
