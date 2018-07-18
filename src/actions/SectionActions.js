@@ -1,6 +1,8 @@
 // SectionActions.js
+import { push } from 'connected-react-router';
 import db from '../firebase';
 import { setNotification } from '../actions';
+import { PATH } from '../constants';
 
 export const SECTION_ACTIONS = {
     SET_SECTIONS: 'SET_SECTIONS'
@@ -21,6 +23,29 @@ export const addSection = (name, type) => {
                 dispatch(setNotification({
                     type: 'FAILURE',
                     message: 'Section failed to add',
+                    error
+                }));
+            });
+    }
+}
+
+export const deleteSection = (id) => {
+    return (dispatch) => {
+        db
+            .collection('sections')
+            .doc(id)
+            .delete()
+            .then(() => {
+                dispatch(push(PATH.schedule));
+                dispatch(setNotification({
+                    type: 'SUCCESS',
+                    message: 'Successfully deleted section'
+                }));
+            })
+            .catch(error => {
+                dispatch(setNotification({
+                    type: 'FAILURE',
+                    message: 'Failed to delete section',
                     error
                 }));
             });

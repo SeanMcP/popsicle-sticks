@@ -46,3 +46,11 @@
     border-color: var(--blue70);
     color: var(--blue70);
 }
+
+.button.danger {
+    background: var(--red);
+}
+
+.button.warning {
+    background: var(--orange);
+}
