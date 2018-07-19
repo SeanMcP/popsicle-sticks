@@ -27,7 +27,7 @@ class StudentContainer extends Component {
         return (
             <WithHeroLayout
                 button={<Icon handleClick={this.openSettings} icon="fas fa-cog fa-lg" />}
-                heading={`${this.props.student.name} ${this.props.student.gender === 'female' ? '♀' : '♂'}`}
+                heading={this.renderTitle()}
             >
                 <div className="student-container container">
                     <Link to="/">Back</Link>
@@ -52,27 +52,37 @@ class StudentContainer extends Component {
     }
 
     renderLevels = () => {
-        const { sections } = this.props.student;
-        const levelList = [];
-        for (const sectionId in sections) {
-            const section = this.props.sections[sectionId];
-            if (section && sections[sectionId]) {
-                levelList.push(
-                    <SectionRow
-                        handleChange={this.updateStudentLevel}
-                        handleRemove={this.removeStudent}
-                        id={sectionId}
-                        key={sectionId}
-                        level={sections[sectionId]}
-                        name={section.name}
-                    />
-                );
+        if (this.props.student) {
+            const { sections } = this.props.student;
+            const levelList = [];
+            for (const sectionId in sections) {
+                const section = this.props.sections[sectionId];
+                if (section && sections[sectionId]) {
+                    levelList.push(
+                        <SectionRow
+                            handleChange={this.updateStudentLevel}
+                            handleRemove={this.removeStudent}
+                            id={sectionId}
+                            key={sectionId}
+                            level={sections[sectionId]}
+                            name={section.name}
+                        />
+                    );
+                }
             }
+            if (levelList.length) {
+                return <ul>{levelList}</ul>
+            }
+            return <div>This student doesn't have any sections.</div>
         }
-        if (levelList.length) {
-            return <ul>{levelList}</ul>
+    }
+
+    renderTitle = () => {
+        const { student } = this.props;
+        if (student && student.name && student.gender) {
+            return `${student.name} ${student.gender === 'female' ? '♀' : '♂'}`;
         }
-        return <div>This student doesn't have any sections.</div>
+        return '';
     }
 
     updateStudentLevel = (sectionId, newLevel) => {

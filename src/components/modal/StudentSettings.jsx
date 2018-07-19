@@ -4,21 +4,23 @@ import { connect } from 'react-redux';
 import Button from '../atomic/Button';
 import Input from '../atomic/Input';
 import SelectGender from '../common/SelectGender';
-import { updateStudentInfo } from '../../actions';
+import { deleteStudent, updateStudentInfo } from '../../actions';
 
 class StudentSettings extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            displayDelete: false,
             name: this.props.name,
             gender: this.props.gender
         }
     }
 
     render() {
+        const { displayDelete } = this.state;
         return (
-            <div className="student-settings creator">
+            <div className="settings creator">
                 <h2>Student info</h2>
                 <Input
                     handleChange={this.handleChange}
@@ -31,6 +33,20 @@ class StudentSettings extends Component {
                     label="Gender"
                     value={this.state.gender}
                 />
+                <div className="delete-section" style={{ gridTemplateColumns: displayDelete ? '1fr 1fr' : '1fr' }}>
+                    {displayDelete ? (
+                        <Button
+                            className="danger full"
+                            icon="fas fa-exclamation-triangle"
+                            handleClick={this.handleDelete}
+                        >
+                            Delete forever
+                        </Button>
+                    ) : null}
+                    <Button className="full" handleClick={this.toggleDisplayDelete}>
+                        {displayDelete ? 'Cancel' : 'Delete'}
+                    </Button>
+                </div>
                 <Button
                     className="full"
                     handleClick={this.handleSave}
@@ -52,14 +68,24 @@ class StudentSettings extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
+    handleDelete = () => {
+        this.props.deleteStudent(this.props.id)
+        return this.props.handleClose();
+    }
+
     handleSave = () => {
         const { name, gender } = this.state;
         this.props.updateStudentInfo(this.props.id, name, gender);
         return this.props.handleClose();
     }
+
+    toggleDisplayDelete = () => {
+        return this.setState(prevState => ({ displayDelete: !prevState.displayDelete }));
+    }
 }
 
 const mapDispatchToProps = {
+    deleteStudent,
     updateStudentInfo
 }
 

@@ -1,6 +1,9 @@
 // StudentActions.js
+import { push } from 'connected-react-router';
 import db from '../firebase';
 import { setNotification } from '../actions';
+import { PATH } from '../constants';
+
 
 export const STUDENT_ACTIONS = {
     SET_ALL_STUDENTS: 'SET_ALL_STUDENTS',
@@ -53,6 +56,29 @@ export const addExistingStudent = (studentId, sectionId, currentLevel) => {
             });
     };
 };
+
+export const deleteStudent = (id) => {
+    return (dispatch) => {
+        db
+            .collection('students')
+            .doc(id)
+            .delete()
+            .then(() => {
+                dispatch(push(PATH.schedule));
+                dispatch(setNotification({
+                    type: 'SUCCESS',
+                    message: 'Successfully deleted student'
+                }));
+            })
+            .catch(error => {
+                dispatch(setNotification({
+                    type: 'FAILURE',
+                    message: 'Failed to delete student',
+                    error
+                }));
+            });
+    }
+}
 
 export const getStudent = (studentId) => {
     return (dispatch) => {
