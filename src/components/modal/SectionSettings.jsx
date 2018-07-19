@@ -20,7 +20,7 @@ class SectionSettings extends Component {
     render() {
         const { displayDelete } = this.state;
         return (
-            <div className="section-settings creator">
+            <div className="settings creator">
                 <h2>Section info</h2>
                 <Input
                     handleChange={this.handleChange}
