@@ -1,6 +1,0 @@
-.section-settings
-.delete-section {
-    display: grid;
-    grid-gap: 0.5rem;
-    grid-template-columns: 1fr;
-}
