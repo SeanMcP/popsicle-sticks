@@ -72,7 +72,7 @@ class StudentCreator extends Component {
                         handleClick={this.handleCreate}
                         disabled={this.disableCreate()}
                     >
-                        Create
+                        Add
                     </Button>
                     <Button
                         className="secondary full"
