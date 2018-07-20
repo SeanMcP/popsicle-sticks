@@ -79,6 +79,16 @@ class SectionContainer extends Component {
         });
     }
 
+    openCopier = () => {
+        return this.props.setModal({
+            name: 'RosterCopier',
+            props: {
+                copyToId: this.props.match.params.sectionId,
+                copyToName: this.props.info.name
+            }
+        });
+    }
+
     openSettings = () => {
         return this.props.setModal({
             name: 'SectionSettings',
@@ -112,6 +122,14 @@ class SectionContainer extends Component {
                 />
             );
         }
+        if (!rows.length) {
+            return (
+                <div className="none-found">
+                    <h2>It's like a fresh notebook</h2>
+                    <div>Add students individually above or <span className="faux-link" onClick={this.openCopier}>copy the roster of another section</span></div>
+                </div>
+            );
+        }
         return <div className="student-list">{rows}</div>;
     }
 
@@ -119,6 +137,7 @@ class SectionContainer extends Component {
         if (this.props.info && this.props.info.name) {
             return this.props.info.name;
         }
+        return '';
     }
 
     updateStudentLevel = (studentId, newLevel) => {

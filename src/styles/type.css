@@ -5,3 +5,7 @@ h1 {
 h2 {
     font-size: 2rem;
 }
+
+b {
+    font-weight: 700;
+}
