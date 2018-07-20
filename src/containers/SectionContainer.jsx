@@ -62,32 +62,32 @@ class SectionContainer extends Component {
     }
     
     openAttendance = (mode) => {
-        return () => this.props.setModal(
-            'StudentAttendance', 
-            {
+        return () => this.props.setModal({
+            name: 'StudentAttendance',
+            props: {
                 mode,
                 section: this.props.match.params.sectionId,
                 students: this.props.students
             }
-        );
+        });
     }
 
     openCreator = () => {
-        return this.props.setModal(
-            'StudentCreator',
-            { section: this.props.match.params.sectionId }
-        );
+        return this.props.setModal({
+            name: 'StudentCreator',
+            props: { section: this.props.match.params.sectionId }
+        });
     }
 
     openSettings = () => {
-        return this.props.setModal(
-            'SectionSettings',
-            {
+        return this.props.setModal({
+            name: 'SectionSettings',
+            props: {
                 id: this.props.match.params.sectionId,
                 name: this.props.info.name,
                 type: this.props.info.type
             }
-        );
+        });
     }
 
     removeStudent = (studentId) => {

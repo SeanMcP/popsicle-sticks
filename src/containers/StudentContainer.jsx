@@ -38,13 +38,14 @@ class StudentContainer extends Component {
     }
 
     openSettings = () => {
-        return this.props.setModal(
-            'StudentSettings', {
+        return this.props.setModal({
+            name: 'StudentSettings',
+            props: {
                 id: this.props.match.params.studentId,
                 name: this.props.student.name,
                 gender: this.props.student.gender
             }
-        );
+        });
     }
 
     removeStudent = (sectionId) => {

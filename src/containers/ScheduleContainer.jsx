@@ -48,7 +48,7 @@ class ScheduleContainer extends Component {
     }
 
     openCreator = () => {
-        return this.props.setModal('SectionCreator');
+        return this.props.setModal({ name: 'SectionCreator' });
     }
 }
 

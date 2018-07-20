@@ -23,14 +23,11 @@ export const clearNotification = () => {
     }
 }
 
-export const setModal = (name, props) => {
+export const setModal = (modalData) => {
     return (dispatch) => {
         dispatch({
             type: NOTIFICATION_ACTIONS.SET_MODAL,
-            data: {
-                name,
-                props
-            }
+            data: modalData
         });
     }
 }
