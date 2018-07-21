@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Button from '../atomic/Button';
 import Select from '../atomic/Select';
-import { getSections } from '../../actions';
+import {
+    copyRoster,
+    getSections
+} from '../../actions';
 import { ObjVal } from '../../utils';
 
 class RosterCopier extends Component {
@@ -74,8 +77,8 @@ class RosterCopier extends Component {
         const { sections } = this.props;
         const copyFromId = Object.keys(sections).filter(id => sections[id].name === name)[0];
         console.log('old section', { name, id: copyFromId });
-        // this.props.updateSection(this.props.id, name, type);
-        // return this.props.handleClose();
+        this.props.copyRoster(copyFromId, this.props.copyToId)
+        return this.props.handleClose();
     }
 }
 
@@ -86,6 +89,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
+    copyRoster,
     getSections,
 }
 

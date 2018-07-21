@@ -57,6 +57,39 @@ export const addExistingStudent = (studentId, sectionId, currentLevel) => {
     };
 };
 
+export const copyRoster = (copyFromId, copyToId) => {
+    return (dispatch) => {
+        db
+            .collection('students')
+            .where(`sections.${copyFromId}`, '>', '0')
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    const section = `sections.${copyToId}`;
+                    db
+                        .collection('students')
+                        .doc(doc.id)
+                        .update({
+                            [section]: 'proficient'
+                        })
+                });
+            })
+            .then(() => {
+                dispatch(setNotification({
+                    type: 'SUCCESS',
+                    message: 'Successfully copied section'
+                }));
+            })
+            .catch(error => {
+                dispatch(setNotification({
+                    type: 'FAILURE',
+                    message: 'Failed to copy section',
+                    error
+                }));
+            });
+    };
+};
+
 export const deleteStudent = (id) => {
     return (dispatch) => {
         db
