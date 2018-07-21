@@ -1,0 +1,72 @@
+.group-container
+.button {
+    display: grid;
+    grid-gap: 0.5rem;
+    justify-items: center;
+}
+
+.group-container
+.button:hover {
+    box-shadow: 0 0 0 0.25rem var(--light-green500);
+}
+
+.group-container
+.button.selected,
+.group-container
+.button:active {
+    background: var(--light-green500);
+}
+
+.group-container
+.group-example {
+    display: flex;
+    justify-content: center;
+}
+
+.group-container
+.option {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 12rem 1fr;
+}
+
+.group-container
+.option
+.options {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.group-container
+.option
+.size-options {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+.group-container
+.option
+.size-options
+.button:first-of-type {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    z-index: 1; 
+}
+
+.group-container
+.option
+.size-options
+.button:last-of-type {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.group-container
+.option
+.size-options
+input {
+    border-radius: 0;
+    text-align: center;
+    width: 100%;
+}
