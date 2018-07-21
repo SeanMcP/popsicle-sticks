@@ -12,15 +12,15 @@ class Toast extends Component {
         }
     }
 
-    componentDidUpdate() {
-        if (!this.props.message) {
-            return this.setState({ isClosing: false });
-        }
-        setTimeout(
-            () => this.setState({ isClosing: true }),
-            this.props.message.length * 100 - 200
-        )
-    }
+    // componentDidUpdate() {
+    //     if (!this.props.message) {
+    //         return this.setState({ isClosing: false });
+    //     }
+    //     setTimeout(
+    //         () => this.setState({ isClosing: true }),
+    //         this.props.message.length * 100 - 200
+    //     )
+    // }
 
     render() {
         const { message, type } = this.props;
