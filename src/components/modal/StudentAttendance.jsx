@@ -12,20 +12,24 @@ class StudentAttendance extends Component {
         super(props);
 
         this.state = {
-            present: Object.keys(this.props.students)
+            absent: [],
         };
     };
 
     render() {
         return (
-            <div className="student-attendance">
+            <div className="student-attendance creator">
                 <h2>Is anyone absent?</h2>
-                {this.renderStudents()}
+                <p>Click to move students from 'present' to 'absent' or <i>vice versa</i>.</p>
+                <div className="student-list">
+                    {this.renderPresent()}
+                    {this.renderAbsent()}
+                </div>
                 <div className="buttons">
-                    <Button handleClick={this.setAttendance}>
+                    <Button className="full" handleClick={this.setAttendance}>
                         Continue
                     </Button>
-                    <Button className="secondary" handleClick={this.props.handleClose}>
+                    <Button className="secondary full" handleClick={this.props.handleClose}>
                         Cancel
                     </Button>
                 </div>
@@ -33,38 +37,70 @@ class StudentAttendance extends Component {
         );
     };
 
-    renderStudents = () => {
-        const { present } = this.state;
+    renderAbsent = () => {
+        const { absent } = this.state;
+        const { students } = this.props;
+        const list = absent.map(id => (
+            <div
+                className="student absent"
+                key={id}
+                onClick={() => this.toggleAbsent(id)}
+            >
+                {students[id].name}
+            </div>
+        ));
+        return (
+            <div className="absent">
+                <h3>Absent ({list.length})</h3>
+                <div className="list">
+                    {list}
+                </div>
+            </div>
+        )
+    }
+
+    renderPresent = () => {
+        const { absent } = this.state;
         const { students } = this.props;
         const list = [];
         for (const id in students) {
-            const student = students[id];
-            list.push(
-                <div
-                    className={`student ${present.includes(id) ? 'present' : 'absent'}`}
-                    key={id}
-                    onClick={() => this.togglePresent(id)}
-                >
-                    {student.name}
-                </div>
-            );
+            if (!absent.includes(id)) {
+                const student = students[id];
+                list.push(
+                    <div
+                        className="student"
+                        key={id}
+                        onClick={() => this.toggleAbsent(id)}
+                    >
+                        {student.name}
+                    </div>
+                );
+            }
         }
-        return <div className="student-list">{list}</div>;
-    };
+        return (
+            <div className="present">
+                <h3>Present ({list.length})</h3>
+                <div className="list">
+                    {list}
+                </div>
+            </div>
+        )
+    }
 
     setAttendance = () => {
-        this.props.setAttendance(this.props.section, this.state.present);
+        const present = Object.keys(this.props.students).filter(id => !this.state.absent.includes(id));
+        this.props.setAttendance(this.props.section, present);
         this.props.handleClose();
         return this.props.history.push(`${this.props.section}/${this.props.mode}`);
     };
 
-    togglePresent = (id) => {
-        const present = [...this.state.present];
-        if (present.includes(id)) {
-            return this.setState({ present: present.filter(student => student !== id) });
+    toggleAbsent = (id) => {
+        const absent = [...this.state.absent];
+        if (absent.includes(id)) {
+            return this.setState({ absent: absent.filter(student => student !== id) });
         }
-        present.push(id);
-        return this.setState({ present });
+        absent.push(id);
+        return this.setState({ absent });
     };
 }
 

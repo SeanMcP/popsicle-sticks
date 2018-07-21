@@ -5,27 +5,43 @@
 
 .student-attendance
 .student-list {
-    background: var(--gray100);
-    box-shadow: inset 2px 2px 4px var(--gray400);
     display: grid;
     grid-gap: 0.5rem;
     grid-template-columns: repeat(2, 1fr);
-    height: 15rem;
+}
+
+.student-attendance
+.student-list
+h3 {
+    margin-bottom: 0.5rem;
+}
+
+.student-attendance
+.student-list
+.list {
+    max-height: 10rem;
+    min-height: 10rem;
     overflow: scroll;
-    padding: 0.5rem;
 }
 
 .student-attendance
 .student-list
 .student {
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
+}
+
+.student-attendance
+.student-list
+.student:hover {
+    text-decoration: underline;
 }
 
 .student-attendance
 .student-list
 .student.absent {
-    opacity: 0.3;
+    color: var(--gray500);
+    text-decoration: line-through;
 }
 
 .student-attendance
