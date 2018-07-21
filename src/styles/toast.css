@@ -43,6 +43,6 @@
     color: var(--red);
 }
 
-/* .toast.closing {
+.toast.closing {
     opacity: 0;
-} */
+}

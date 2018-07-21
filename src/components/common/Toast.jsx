@@ -12,6 +12,16 @@ class Toast extends Component {
         }
     }
 
+    componentDidUpdate() {
+        if (!this.props.message) {
+            return this.setState({ isClosing: false });
+        }
+        setTimeout(
+            () => this.setState({ isClosing: true }),
+            this.props.message.length * 100 - 200
+        )
+    }
+
     render() {
         const { message, type } = this.props;
 
@@ -23,7 +33,6 @@ class Toast extends Component {
             <div className={`toast type-${type} ${this.state.isClosing ? 'closing' : ''}`}>
                 <Icon icon={`fas fa-${this.generateIcon()}-circle fa-2x`} />
                 <div className="message">{message}</div>
-                {this.handleClose()}
             </div>
         );
     }
@@ -36,15 +45,6 @@ class Toast extends Component {
                 return 'exclamation';
             default:
                 return 'dot';
-        }
-    }
-
-    handleClose = () => {
-        if (!this.state.isClosing) {
-            this.setState({ isClosing: true });
-            setTimeout(() =>
-                this.setState({ isClosing: false }, this.props.clearNotification)
-                , this.props.message.length * 100);
         }
     }
 }

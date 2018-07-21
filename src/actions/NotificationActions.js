@@ -32,11 +32,17 @@ export const setModal = (modalData) => {
     }
 }
 
-export const setNotification = ({ error, message, type }) => {
+export const setNotification = ({ error, message, type, clears }) => {
     return (dispatch) => {
         dispatch({
             type: NOTIFICATION_ACTIONS.SET_NOTIFICATION,
             data: { message, type, error },
         });
+        if (clears !== false) {
+            setTimeout(
+                () => dispatch(clearNotification()),
+                message.length * 100
+            );
+        }
     }
 }
