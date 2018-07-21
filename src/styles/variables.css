@@ -1,4 +1,5 @@
 :root {
+    --bold:         700;
     /* Borders by background color */
     --border-white: 1px solid var(--gray300);
 

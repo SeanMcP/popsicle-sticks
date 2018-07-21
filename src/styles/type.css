@@ -6,6 +6,9 @@ h2 {
     font-size: 2rem;
 }
 
-b {
-    font-weight: 700;
+h3 {
+    font-size: 1.5rem;
 }
+
+b { font-weight: var(--bold) }
+i { font-style: italic }
