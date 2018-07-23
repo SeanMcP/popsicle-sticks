@@ -12,3 +12,17 @@ export const Shuffle = (arr) => {
 
     return output;
 }
+
+export const FindLongestArr = (arrOfArrs) => {
+    let length = -Infinity;
+    let index = -1;
+    
+    arrOfArrs.forEach((arr, i) => {
+        if (arr.length > length) {
+            length = arr.length;
+            index = i;
+        }
+    });
+
+    return index;
+}
