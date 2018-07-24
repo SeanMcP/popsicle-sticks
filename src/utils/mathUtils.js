@@ -1,13 +1,54 @@
-export const Shuffle = (arr) => {
-    const output = [...arr];
-    let count = output.length;
+export const FindLongestArr = (arrOfArrs, request) => {
+    // This intentionally does not care whether
+    // there are more than one longest array.
 
-    while (count > 0) {
-        const i = Math.floor(Math.random() * count);
-        count--;
-        const temp = output[count];
-        output[count] = output[i];
-        output[i] = temp;
+    let length = -Infinity;
+    let index = -1;
+
+    arrOfArrs.forEach((arr, i) => {
+        if (arr.length > length) {
+            length = arr.length;
+            index = i;
+        }
+    });
+
+    if (request === 'index') {
+        return index;
+    } else if (request === 'length') {
+        return arrOfArrs[index].length;
+    } else {
+        return arrOfArrs[index];
+    }
+}
+export const MixedGroupsOf = (size, arrOfArrs) => {
+    const output = [];
+    const longestLength = FindLongestArr(arrOfArrs, 'length');
+    let group = [];
+
+    for (let i = 0; i < longestLength; i++) {
+        // Iterate through a group
+
+        for (let g = 0; g < arrOfArrs.length; g++) {
+            // Interate through the groups
+            const current = arrOfArrs[g][i];
+
+            if (current) {
+                group.push(current);
+            }
+
+            if (group.length === size) {
+                output.push(group);
+                group = [];
+            }
+
+            if (
+                group.length &&
+                i === longestLength - 1 &&
+                g === arrOfArrs.length - 1
+            ) {
+                output.push(group);
+            }
+        }
     }
 
     return output;
@@ -47,59 +88,34 @@ export const SameGroupsOf = (size, arrOfArrs) => {
     return output;
 }
 
-export const MixedGroupsOf = (size, arrOfArrs) => {
-    const output = [];
-    const longestLength = FindLongestArr(arrOfArrs, 'length');
-    let group = [];
+export const Shuffle = (arr) => {
+    const output = [...arr];
+    let count = output.length;
 
-    for (let i = 0; i < longestLength; i++) {
-        // Iterate through a group
-
-        for (let g = 0; g < arrOfArrs.length; g++) {
-            // Interate through the groups
-            const current = arrOfArrs[g][i];
-
-            if (current) {
-                group.push(current);
-            }
-
-            if (group.length === size) {
-                output.push(group);
-                group = [];
-            }
-
-            if (
-                group.length &&
-                i === longestLength - 1 &&
-                g === arrOfArrs.length - 1
-            ) {
-                output.push(group);
-            }
-        }
+    while (count > 0) {
+        const i = Math.floor(Math.random() * count);
+        count--;
+        const temp = output[count];
+        output[count] = output[i];
+        output[i] = temp;
     }
 
     return output;
 }
 
-export const FindLongestArr = (arrOfArrs, request) => {
-    // This intentionally does not care whether
-    // there are more than one longest array.
+export const SortObjectByKey = (obj, key) => {
+    const output = {};
 
-    let length = -Infinity;
-    let index = -1;
+    for (const prop in obj) {
+        const current = obj[prop];
+        const value = current[key];
 
-    arrOfArrs.forEach((arr, i) => {
-        if (arr.length > length) {
-            length = arr.length;
-            index = i;
+        if (!output.hasOwnProperty(value)) {
+            output[value] = {};
         }
-    });
 
-    if (request === 'index') {
-        return index;
-    } else if (request === 'length') {
-        return arrOfArrs[index].length;
-    } else {
-        return arrOfArrs[index];
+        output[value][prop] = current;
     }
+
+    return output;
 }
