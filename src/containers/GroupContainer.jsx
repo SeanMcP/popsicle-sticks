@@ -2,7 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '../components/atomic/Button';
 import Icon from '../components/atomic/Icon';
-import { Capitalize } from '../utils';
+import {
+    getStudentsBySection
+} from '../actions';
+import {
+    Capitalize,
+    // MixedGroupsOf,
+    SameGroupsOf,
+    Shuffle,
+    // SortObjectByKey
+} from '../utils';
 
 class GroupContainer extends Component {
     constructor(props) {
@@ -10,9 +19,14 @@ class GroupContainer extends Component {
 
         this.state = {
             gender: 'random',
+            groups: [],
             level: 'random',
             size: 4
         }
+    }
+
+    componentDidMount() {
+        this.props.getStudentsBySection(this.props.match.params.sectionId);
     }
 
     render() {
@@ -38,11 +52,42 @@ class GroupContainer extends Component {
                         />
                     </div>
                 </div>
-                <Button className="full">
+                <Button
+                    className="full"
+                    handleClick={this.handleGroup}
+                >
                     Make groups!
                 </Button>
+                <div className="groups">
+                    {this.renderGroups()}
+                </div>
             </div>
         )
+    }
+
+    getPresentStudents = () => {
+        const { attendance, students } = this.props;
+
+        if (attendance.length) {
+            for (const id in students) {
+                if (!attendance.includes(id)) {
+                    delete students[id];
+                }
+            }
+        }
+
+        return students;
+    }
+
+    handleGroup = () => {
+        const { gender, level, size } = this.state;
+        const students = this.getPresentStudents();
+
+        if (gender === 'random' && level === 'random') {
+            return this.setState({
+                groups: SameGroupsOf(size, [Shuffle(Object.keys(students))])
+            });
+        }
     }
 
     handleInputButton = (amount) => {
@@ -54,20 +99,6 @@ class GroupContainer extends Component {
 
     handleInputChange = (e) => {
         this.setState({ size: e.target.value });
-    }
-
-    renderGroupExample = (key) => {
-        const hash = {
-            'same': ['square', 'square'],
-            'mixed': ['star', 'circle'],
-            'random': ['dice'],
-        }
-        const icons = hash[key].map((option, i) => (
-            <Icon key={i} icon={`fas fa-${option} fa-lg fa-fw`} />
-        ));
-        return (
-            <div className="group-example">{icons}</div>
-        )
     }
 
     renderButtons = (option) => {
@@ -85,6 +116,44 @@ class GroupContainer extends Component {
         return (
             <div className="options">{list}</div>
         )
+    }
+
+    renderGroupExample = (key) => {
+        const hash = {
+            'same': ['square', 'square'],
+            'mixed': ['star', 'circle'],
+            'random': ['dice'],
+        }
+        const icons = hash[key].map((option, i) => (
+            <Icon key={i} icon={`fas fa-${option} fa-lg fa-fw`} />
+        ));
+        return (
+            <div className="group-example">{icons}</div>
+        )
+    }
+
+    renderGroups = () => {
+        const { groups } = this.state;
+        const { students } = this.props;
+
+        if (groups.length) {
+            const groupList = groups.map((group, i) => {
+                const studentList = group.map((studentId, j) => (
+                    <div className="student" key={`${i}-${j}`}>
+                        {students[studentId].name}
+                    </div>
+                ));
+
+                return (
+                    <div className="group" key={`group-${i + 1}`}>
+                        <h4>Group {i + 1}</h4>
+                        {studentList}
+                    </div>
+                );
+            });
+
+            return groupList;
+        }
     }
 
     renderOptions = () => {
@@ -114,4 +183,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(GroupContainer);
+const mapDispatchToProps = {
+    getStudentsBySection
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GroupContainer);

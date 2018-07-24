@@ -70,3 +70,27 @@ input {
     text-align: center;
     width: 100%;
 }
+
+.group-container
+.groups {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.group-container
+.groups
+.group {
+    border: 1px solid var(--gray500);
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1rem;
+}
+
+.group-container
+.groups
+.group
+h4 {
+    grid-area: 1 / span 2 / 1 / span 1;
+}
