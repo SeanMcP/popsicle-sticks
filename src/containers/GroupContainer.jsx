@@ -7,10 +7,11 @@ import {
 } from '../actions';
 import {
     Capitalize,
+    GetArraysByObjectKey,
     MixedGroupsOf,
     SameGroupsOf,
     Shuffle,
-    SortObjectByKey
+    // SortObjectByKey
 } from '../utils';
 
 class GroupContainer extends Component {
@@ -92,15 +93,15 @@ class GroupContainer extends Component {
                 groups: SameGroupsOf(size, [Shuffle(Object.keys(students))])
             });
         }
-        if (gender !== 'random') {
-            const sortedByGender = SortObjectByKey(students, 'gender');
-            return this.setState({
-                groups: hash[gender](size, [
-                    Shuffle(Object.keys(sortedByGender.female)),
-                    Shuffle(Object.keys(sortedByGender.male)),
-                ])
-            });
-        }
+
+        // const sortedByGender = SortObjectByKey(students, 'gender');
+        // const femalesByLevel = SortObjectByKey(sortedByGender.female, 'level');
+        // const malesByLevel = SortObjectByKey(sortedByGender.male, 'level');
+        // const arrOfArrs = [];
+
+        return this.setState({
+            groups: hash[gender](size, GetArraysByObjectKey(students, 'gender'))
+        });
     }
 
     handleInputButton = (amount) => {
