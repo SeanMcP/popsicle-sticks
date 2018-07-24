@@ -82,16 +82,20 @@ class GroupContainer extends Component {
     handleGroup = () => {
         const { gender, level, size } = this.state;
         const students = this.getPresentStudents();
+        const hash = {
+            mixed: MixedGroupsOf,
+            same: SameGroupsOf
+        };
 
         if (gender === 'random' && level === 'random') {
             return this.setState({
                 groups: SameGroupsOf(size, [Shuffle(Object.keys(students))])
             });
         }
-        if (gender === 'mixed') {
+        if (gender !== 'random') {
             const sortedByGender = SortObjectByKey(students, 'gender');
             return this.setState({
-                groups: MixedGroupsOf(size, [
+                groups: hash[gender](size, [
                     Shuffle(Object.keys(sortedByGender.female)),
                     Shuffle(Object.keys(sortedByGender.male)),
                 ])
