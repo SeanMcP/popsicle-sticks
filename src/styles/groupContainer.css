@@ -92,5 +92,20 @@ input {
 .groups
 .group
 h4 {
-    grid-area: 1 / span 2 / 1 / span 1;
+    grid-column: 1 / span 2;
+    text-align: center;
+}
+
+.group-container
+.groups
+.group
+.student.female {
+    color: var(--light-green800);
+}
+
+.group-container
+.groups
+.group
+.student.male {
+    color: var(--blue800);
 }
