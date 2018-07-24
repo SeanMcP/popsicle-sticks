@@ -20,6 +20,12 @@ export const FindLongestArr = (arrOfArrs, request) => {
         return arrOfArrs[index];
     }
 }
+
+export const GetArraysByObjectKeys = (obj, key) => {
+    const sorted = SortObjectByKey(obj, key);
+    return Object.keys(sorted).map(category => Shuffle(Object.keys(category)));
+}
+
 export const MixedGroupsOf = (size, arrOfArrs) => {
     const output = [];
     const longestLength = FindLongestArr(arrOfArrs, 'length');
