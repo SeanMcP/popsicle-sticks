@@ -11,7 +11,7 @@ import {
     MixedGroupsOf,
     SameGroupsOf,
     Shuffle,
-    // SortObjectByKey
+    SortObjectByKey
 } from '../utils';
 
 class GroupContainer extends Component {
@@ -82,6 +82,7 @@ class GroupContainer extends Component {
 
     handleGroup = () => {
         const { gender, level, size } = this.state;
+        const { sectionId } = this.props.match.params;
         const students = this.getPresentStudents();
         const hash = {
             mixed: MixedGroupsOf,
@@ -93,11 +94,25 @@ class GroupContainer extends Component {
                 groups: SameGroupsOf(size, [Shuffle(Object.keys(students))])
             });
         }
+        if (gender !== 'random') {
+            const sortedByGender = SortObjectByKey(students, 'gender');
+            const females = sortedByGender.female;
+            const males = sortedByGender.male;
+            // const femalesByLevel = SortObjectByKey(sortedByGender.female, 'level');
+            // const malesByLevel = SortObjectByKey(sortedByGender.male, 'level');
+            const femalesByLevel = GetArraysByObjectKey(females, 'level', sectionId);
+            const malesByLevel = GetArraysByObjectKey(males, 'level', sectionId);
+            console.log('femalesByLevel', femalesByLevel);
+            console.log('malesByLevel', malesByLevel);
+            const arrOfArrs = [].concat(femalesByLevel, malesByLevel);
+            console.log('arrOfArrs', arrOfArrs);
 
-        // const sortedByGender = SortObjectByKey(students, 'gender');
-        // const femalesByLevel = SortObjectByKey(sortedByGender.female, 'level');
-        // const malesByLevel = SortObjectByKey(sortedByGender.male, 'level');
-        // const arrOfArrs = [];
+            return this.setState({
+                groups: hash[gender](size, level !== 'random' ? arrOfArrs : [Object.keys(females), Object.keys(males)])
+            })
+
+        }
+
 
         return this.setState({
             groups: hash[gender](size, GetArraysByObjectKey(students, 'gender'))

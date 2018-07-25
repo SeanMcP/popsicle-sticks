@@ -21,8 +21,8 @@ export const FindLongestArr = (arrOfArrs, request) => {
     }
 }
 
-export const GetArraysByObjectKey = (obj, key) => {
-    const sorted = SortObjectByKey(obj, key);
+export const GetArraysByObjectKey = (obj, key, sectionId) => {
+    const sorted = sectionId ? SortStudentsByLevel(obj, sectionId) : SortObjectByKey(obj, key);
     return Object.keys(sorted).map(category => Shuffle(Object.keys(sorted[category])));
 }
 
@@ -121,6 +121,23 @@ export const SortObjectByKey = (obj, key) => {
         }
 
         output[value][prop] = current;
+    }
+
+    return output;
+}
+
+export const SortStudentsByLevel = (studentObj, sectionId) => {
+    const output = {};
+
+    for (const studentId in studentObj) {
+        const current = studentObj[studentId];
+        const level = current.sections[sectionId];
+
+        if (!output.hasOwnProperty(level)) {
+            output[level] = {};
+        }
+
+        output[level][studentId] = current;
     }
 
     return output;
