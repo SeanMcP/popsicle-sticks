@@ -21,6 +21,21 @@ export const FindLongestArr = (arrOfArrs, request) => {
     }
 }
 
+export const MergeArr = (arrOfArrs) => {
+    const length = FindLongestArr(arrOfArrs, 'length');
+    const mergedArr = [];
+
+    for (const i = 0; i < length; i++) {
+        for (const g = 0; g < arrOfArrs.length; g++) {
+            if (arrOfArrs[g][i]) {
+                mergedArr.push(arrOfArrs[g][i]);
+            }
+        }
+    }
+
+    return mergedArr;
+}
+
 export const Shuffle = (arr) => {
     const output = [...arr];
     let count = output.length;
