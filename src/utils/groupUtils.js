@@ -44,7 +44,17 @@ export const GroupStudents = ({ gender, level, sectionId, size, students }) => {
                 return SameGroupsOf(size, [ Shuffle(Object.keys(femalesObj)), Shuffle(Object.keys(malesObj)) ]);
             }
         }
+    } else if (gender === 'random') {
+        const studentsByLevel = GetArraysByObjectKey(students, 'level', sectionId);
+
+        if (level === 'mixed') {
+            return MixedGroupsOf(size, studentsByLevel);
+        } else if (level === 'same') {
+            return SameGroupsOf(size, studentsByLevel);
+        }
     }
+
+    return [];
 }
 
 // Grouping Utils
