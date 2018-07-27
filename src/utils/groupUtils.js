@@ -1,4 +1,8 @@
-import { FindLongestArr, Shuffle } from '../utils';
+import {
+    FindLongestArr,
+    MergeArrs,
+    Shuffle
+} from '../utils';
 
 export const GroupStudents = ({ gender, level, sectionId, size, students }) => {
     if (gender === 'random' && level === 'random') {
@@ -22,10 +26,22 @@ export const GroupStudents = ({ gender, level, sectionId, size, students }) => {
                 const malesByDescendingLevel = malesByLevelArr[0].concat(
                     malesByLevelArr[1], malesByLevelArr[2]
                 );
+
                 return Shuffle(MixedGroupsOf(size, [ femalesByDescendingLevel, malesByDescendingLevel ]));
 
             } else if (level === 'random') {
                 return MixedGroupsOf(size, [ Shuffle(Object.keys(femalesObj)), Shuffle(Object.keys(malesObj)) ]);
+            }
+        } else if (gender === 'same') {
+            if (level === 'mixed') {
+                const femalesAlternatingLevels = MergeArrs(femalesByLevelArr);
+                const malesAlternatingLevels = MergeArrs(malesByLevelArr);
+
+                return SameGroupsOf(size, [ femalesAlternatingLevels, malesAlternatingLevels ]);
+            } else if (level === 'same') {
+                return SameGroupsOf(size, [ ...femalesByLevelArr, ...malesByLevelArr ]);
+            } else if (level === 'random') {
+                return SameGroupsOf(size, [ Shuffle(Object.keys(femalesObj)), Shuffle(Object.keys(malesObj)) ]);
             }
         }
     }

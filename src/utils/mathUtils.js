@@ -21,12 +21,12 @@ export const FindLongestArr = (arrOfArrs, request) => {
     }
 }
 
-export const MergeArr = (arrOfArrs) => {
+export const MergeArrs = (arrOfArrs) => {
     const length = FindLongestArr(arrOfArrs, 'length');
     const mergedArr = [];
 
-    for (const i = 0; i < length; i++) {
-        for (const g = 0; g < arrOfArrs.length; g++) {
+    for (let i = 0; i < length; i++) {
+        for (let g = 0; g < arrOfArrs.length; g++) {
             if (arrOfArrs[g][i]) {
                 mergedArr.push(arrOfArrs[g][i]);
             }
