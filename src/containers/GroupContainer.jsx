@@ -19,7 +19,9 @@ class GroupContainer extends Component {
             gender: 'random',
             groups: [],
             level: 'random',
-            size: 4
+            sectionIndex: null,
+            size: 4,
+            studentId: '',
         }
     }
 
@@ -82,8 +84,6 @@ class GroupContainer extends Component {
         const { sectionId } = this.props.match.params;
         const students = this.getPresentStudents();
         const groups = Shuffle(GroupStudents({ gender, level, sectionId, size, students }));
-
-        // console.log('groups', groups);
         
         return this.setState({ groups });
     }
@@ -97,6 +97,22 @@ class GroupContainer extends Component {
 
     handleInputChange = (e) => {
         this.setState({ size: e.target.value });
+    }
+
+    moveStudentToSection = (newSectionIndex) => () => {
+        const { groups, sectionIndex, studentId } = this.state;
+        if (sectionIndex >= 0 && sectionIndex !== newSectionIndex && studentId) {
+            const updatedGroups = [...groups];
+
+            updatedGroups[sectionIndex] = updatedGroups[sectionIndex].filter(id => id !== studentId);
+            updatedGroups[newSectionIndex].push(studentId);
+
+            return this.setState({
+                groups: updatedGroups.filter(group => group.length),
+                sectionIndex: null,
+                studentId: ''
+            });
+        }
     }
 
     renderButtons = (option) => {
@@ -138,7 +154,8 @@ class GroupContainer extends Component {
             const groupList = groups.map((group, i) => {
                 const studentList = group.map((studentId, j) => (
                     <div
-                        className={`student ${students[studentId].gender}`}
+                        className={`student ${students[studentId].gender} ${studentId === this.state.studentId ? 'selected' : ''}`}
+                        onClick={this.selectStudent(i, studentId)}
                         key={`${i}-${j}`}
                     >
                         {students[studentId].name}
@@ -146,9 +163,15 @@ class GroupContainer extends Component {
                 ));
 
                 return (
-                    <div className="group" key={`group-${i + 1}`}>
+                    <div
+                        className={`group-block ${this.state.studentId && this.state.sectionIndex !== i ? 'click' : ''}`}
+                        key={`group-${i + 1}`}
+                        onClick={this.moveStudentToSection(i)}
+                    >
                         <h4>Group {i + 1}</h4>
-                        {studentList}
+                        <div className="group">
+                            {studentList}
+                        </div>
                     </div>
                 );
             });
@@ -170,6 +193,23 @@ class GroupContainer extends Component {
                 </div>
             )
         })
+    }
+
+    selectStudent = (sectionIndex, studentId) => {
+        return () =>
+            this.setState(
+                prevState => ({
+                    studentId:
+                        prevState.studentId !== studentId
+                        ? studentId
+                        : null
+                        ,
+                    sectionIndex:
+                        prevState.sectionIndex !== sectionIndex
+                        ? sectionIndex
+                        : null
+                })
+            );
     }
 
     updateState = (key, value) => {
