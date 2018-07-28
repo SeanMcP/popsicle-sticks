@@ -23,6 +23,7 @@
     --dark-shadow:  0 0 0.25rem rgba(0, 0, 0, 0.25);
 
     --an-md:        200ms ease-in-out;
+    --an-sh:        100ms ease-in-out;
 
     --tablet:       1000px;
     --mobile:       600px;
