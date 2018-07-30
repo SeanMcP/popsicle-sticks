@@ -1,0 +1,21 @@
+.random.container
+.students {
+    display: grid;
+    font-size: 3rem;
+    grid-gap: 0.5rem;
+    margin: 1rem;
+    text-align: center;
+}
+
+.random.container
+.students > div:not(.current) {
+    font-size: 1.5rem;
+    opacity: 0.5;
+}
+
+.random.container
+.buttons {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+}

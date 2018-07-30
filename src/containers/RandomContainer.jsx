@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Button from '../components/atomic/Button';
 import {
     getStudentsBySection
 } from '../actions';
@@ -32,15 +33,31 @@ class RandomContainer extends Component {
 
     render() {
         return (
-            <div className="random-container">
+            <div className="random container">
                 <Link to={`/section/${this.props.match.params.sectionId}`}>Back</Link>
                 <h1>Random</h1>
-                <div onClick={this.nextStudent}>Next</div>
-                <div onClick={this.prevStudent}>Back</div>
                 {this.renderStudent()}
-                <div onClick={this.togglePreview}>
-                    {`${this.state.displayPreview ? 'Hide' : 'Show'} preview`}
+                <div className="buttons">
+                    <Button
+                        className="full"
+                        handleClick={this.prevStudent}
+                    >
+                        Back
+                    </Button>
+                    <Button
+                        className="full"
+                        handleClick={this.nextStudent}
+                    >
+                        Next
+                    </Button>
                 </div>
+                <Button
+                    className="secondary full"
+                    handleClick={this.togglePreview}
+                    icon={`far fa-eye${this.state.displayPreview ? '-slash' : ''}`}
+                >
+                    {`${this.state.displayPreview ? 'Hide' : 'Show'} preview`}
+                </Button>
             </div>
         );
     }
@@ -88,7 +105,7 @@ class RandomContainer extends Component {
                 <div className="students">
                     {displayPreview ? (
                         <div className="next">
-                            Next up: {index + 1 >= list.length ? 'Random' : next.name}
+                            Next: {index + 1 >= list.length ? 'Random' : next.name}
                         </div>
                     ) : null}
                     <div className="current">
@@ -96,7 +113,7 @@ class RandomContainer extends Component {
                     </div>
                     {displayPreview ? (
                         <div className="prev">
-                            Previous: {index - 1 < 0 ? 'Random' : prev.name}
+                            Back: {index - 1 < 0 ? 'Random' : prev.name}
                         </div>
                     ) : null}
                 </div>

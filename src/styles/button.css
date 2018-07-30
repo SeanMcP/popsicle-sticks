@@ -20,7 +20,8 @@
     background: var(--blue700);
 }
 
-.button > i {
+.button >
+.icon {
     margin-right: 0.5rem;
 }
 
