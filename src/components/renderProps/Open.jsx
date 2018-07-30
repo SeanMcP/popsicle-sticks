@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 class Open extends Component {
     constructor(props) {
@@ -11,10 +11,10 @@ class Open extends Component {
 
     render() {
         const renderProps = {
-            close,
+            close: this.close,
             isOpen: this.state.isOpen,
-            open,
-            toggle
+            open: this.open,
+            toggle: this.toggle
         }
 
         if (typeof this.props.children === 'function') {

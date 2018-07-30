@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '../components/atomic/Button';
+import FullScreen from '../components/common/FullScreen';
 import Icon from '../components/atomic/Icon';
 import {
     getStudentsBySection
@@ -58,9 +59,14 @@ class GroupContainer extends Component {
                 >
                     Make groups!
                 </Button>
-                <div className="groups">
-                    {this.renderGroups()}
-                </div>
+                <FullScreen
+                    displayWhen={this.state.groups.length > 0}
+                    title="Groups"
+                >
+                    <div className="groups">
+                        {this.renderGroups()}
+                    </div>
+                </FullScreen>
             </div>
         )
     }

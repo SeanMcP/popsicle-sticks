@@ -1,0 +1,35 @@
+.full-screen {
+    position: relative;
+}
+
+.full-screen h1 {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.full-screen >
+.icon {
+    bottom: 0;
+    opacity: 0.5;
+    padding: 0.5rem;
+    position: absolute;
+    right: 0;
+}
+
+.full-screen.open {
+    background: var(--gray100);
+    bottom: 0;
+    font-size: 125%;
+    left: 0;
+    padding: 5rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.full-screen.open >
+.icon {
+    bottom: 1rem;
+    right: 1rem;
+}
