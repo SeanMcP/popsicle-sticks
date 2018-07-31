@@ -6,6 +6,7 @@ import Icon from '../components/atomic/Icon';
 import StudentRow from '../components/section/StudentRow';
 import WithHeroLayout from '../components/layout/WithHeroLayout';
 import {
+    addHighlightToStudent,
     addStudent,
     getSections,
     getStudentsBySection,
@@ -60,6 +61,13 @@ class SectionContainer extends Component {
         }
         return 'type-default';
     }
+
+    highlightStudent = (studentId) => {
+        return () =>
+            this.props.addHighlightToStudent(
+                studentId, this.props.match.params.sectionId, 'yellow'
+            );
+    }
     
     openAttendance = (mode) => {
         return () => this.props.setModal({
@@ -111,14 +119,17 @@ class SectionContainer extends Component {
         if (ObjVal(students)) {
             for (const id in students) {
                 const student = students[id];
+                const currentSection =student.sections[sectionId];
                 rows.push(
                     <StudentRow
                         gender={student.gender}
                         handleChange={this.updateStudentLevel}
+                        handleHighlight={this.highlightStudent(id)}
                         handleRemove={this.removeStudent}
+                        highlight={currentSection.highlight}
                         id={id}
                         key={id}
-                        level={student.sections[sectionId].current_level}
+                        level={currentSection.current_level}
                         name={student.name}
                     />
                 );
@@ -155,6 +166,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = {
+    addHighlightToStudent,
     addStudent,
     getSections,
     getStudentsBySection,

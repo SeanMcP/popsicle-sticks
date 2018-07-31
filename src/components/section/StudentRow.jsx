@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Gender from '../common/Gender';
+import Icon from '../atomic/Icon';
 import SelectLevel from '../common/SelectLevel';
 
 const StudentRow = (props) => (
     <div className="student-row">
-        <div className="name">
+        <div className="name" style={{ backgroundColor: props.highlight ? props.highlight : 'none' }}>
             <Link to={`/student/${props.id}`}>
                 {props.name}
             </Link>
@@ -19,6 +20,7 @@ const StudentRow = (props) => (
             />
         </div>
         <div className="buttons">
+            <Icon handleClick={props.handleHighlight} icon="fas fa-highlighter"/>
             <div className="faux-link" onClick={() => props.handleRemove(props.id)}>
                 Remove
             </div>

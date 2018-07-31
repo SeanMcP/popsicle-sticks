@@ -65,6 +65,31 @@ export const addExistingStudent = (studentId, sectionId, currentLevel) => {
     };
 };
 
+export const addHighlightToStudent = (studentId, sectionId, color) => {
+    return (dispatch) => {
+        const objPath = `sections.${sectionId}.highlight`;
+        db
+            .collection('students')
+            .doc(studentId)
+            .update({
+                [objPath]: color
+            })
+            .then(() => {
+                dispatch(setNotification({
+                    type: 'SUCCESS',
+                    message: 'Successfully highlighted student'
+                }));
+            })
+            .catch(error => {
+                dispatch(setNotification({
+                    type: 'FAILURE',
+                    message: 'Failed to highlight student',
+                    error
+                }));
+            });
+    };
+};
+
 export const copyRoster = (copyFromId, copyToId) => {
     return (dispatch) => {
         db
