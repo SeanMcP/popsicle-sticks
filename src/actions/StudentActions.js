@@ -14,7 +14,11 @@ export const STUDENT_ACTIONS = {
 
 export const addStudent = (name, gender, sectionId, currentLevel) => {
     return (dispatch) => {
-        const sections = { [sectionId]: currentLevel };
+        const sections = {
+            [sectionId]: {
+                current_level: currentLevel
+            }
+        };
         db
             .collection('students')
             .add({ name, gender, sections })
@@ -40,7 +44,11 @@ export const addExistingStudent = (studentId, sectionId, currentLevel) => {
         db
             .collection('students')
             .doc(studentId)
-            .update({ [section]: currentLevel })
+            .update({
+                [section]: {
+                    current_level: currentLevel
+                }
+            })
             .then(() => {
                 dispatch(setNotification({
                     type: 'SUCCESS',
@@ -61,7 +69,7 @@ export const copyRoster = (copyFromId, copyToId) => {
     return (dispatch) => {
         db
             .collection('students')
-            .where(`sections.${copyFromId}`, '>', '0')
+            .where(`sections.${copyFromId}.current_level`, '>', '0')
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
@@ -70,7 +78,9 @@ export const copyRoster = (copyFromId, copyToId) => {
                         .collection('students')
                         .doc(doc.id)
                         .update({
-                            [section]: 'proficient'
+                            [section]: {
+                                current_level: 'proficient'
+                            }
                         })
                 });
             })
@@ -148,7 +158,7 @@ export const getStudentsBySection = (sectionId) => {
     return (dispatch) => {
         db
             .collection('students')
-            .where(`sections.${sectionId}`, '>', '0')
+            .where(`sections.${sectionId}.current_level`, '>', '0')
             .onSnapshot((querySnapshot) => {
                 const output = {};
                 querySnapshot.forEach((doc) => {
@@ -169,7 +179,7 @@ export const removeStudentFromSection = (studentId, sectionId) => {
             .collection('students')
             .doc(studentId)
             .update({
-                [section]: ''
+                [section]: {}
             })
             .then(() => {
                 dispatch(setNotification({
@@ -231,7 +241,9 @@ export const updateStudentLevel = (studentId, sectionId, newLevel) => {
             .doc(studentId)
             .set({
                 sections: {
-                    [sectionId]: newLevel
+                    [sectionId]: {
+                        current_level: newLevel
+                    }
                 }
             }, { merge: true })
             .then(() => {

@@ -108,19 +108,21 @@ class SectionContainer extends Component {
         const { students } = this.props;
         const { sectionId } = this.props.match.params;
         const rows = [];
-        for (const id in students) {
-            const student = students[id];
-            rows.push(
-                <StudentRow
-                    gender={student.gender}
-                    handleChange={this.updateStudentLevel}
-                    handleRemove={this.removeStudent}
-                    id={id}
-                    key={id}
-                    level={student.sections[sectionId]}
-                    name={student.name}
-                />
-            );
+        if (ObjVal(students)) {
+            for (const id in students) {
+                const student = students[id];
+                rows.push(
+                    <StudentRow
+                        gender={student.gender}
+                        handleChange={this.updateStudentLevel}
+                        handleRemove={this.removeStudent}
+                        id={id}
+                        key={id}
+                        level={student.sections[sectionId].current_level}
+                        name={student.name}
+                    />
+                );
+            }
         }
         if (!rows.length) {
             return (

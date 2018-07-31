@@ -58,14 +58,14 @@ class StudentContainer extends Component {
             const levelList = [];
             for (const sectionId in sections) {
                 const section = this.props.sections[sectionId];
-                if (section && sections[sectionId]) {
+                if (section && sections[sectionId] && sections[sectionId].current_level) {
                     levelList.push(
                         <SectionRow
                             handleChange={this.updateStudentLevel}
                             handleRemove={this.removeStudent}
                             id={sectionId}
                             key={sectionId}
-                            level={sections[sectionId]}
+                            level={sections[sectionId].current_level}
                             name={section.name}
                         />
                     );
