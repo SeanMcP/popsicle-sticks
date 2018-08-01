@@ -6,7 +6,7 @@ import Icon from '../components/atomic/Icon';
 import StudentRow from '../components/section/StudentRow';
 import WithHeroLayout from '../components/layout/WithHeroLayout';
 import {
-    addHighlightToStudent,
+    highlightStudent,
     addStudent,
     getSections,
     getStudentsBySection,
@@ -64,7 +64,7 @@ class SectionContainer extends Component {
 
     highlightStudent = (studentId) => {
         return () =>
-            this.props.addHighlightToStudent(
+            this.props.highlightStudent(
                 studentId, this.props.match.params.sectionId, 'yellow'
             );
     }
@@ -166,7 +166,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = {
-    addHighlightToStudent,
+    highlightStudent,
     addStudent,
     getSections,
     getStudentsBySection,

@@ -65,31 +65,6 @@ export const addExistingStudent = (studentId, sectionId, currentLevel) => {
     };
 };
 
-export const addHighlightToStudent = (studentId, sectionId, color) => {
-    return (dispatch) => {
-        const objPath = `sections.${sectionId}.highlight`;
-        db
-            .collection('students')
-            .doc(studentId)
-            .update({
-                [objPath]: color
-            })
-            .then(() => {
-                dispatch(setNotification({
-                    type: 'SUCCESS',
-                    message: 'Successfully highlighted student'
-                }));
-            })
-            .catch(error => {
-                dispatch(setNotification({
-                    type: 'FAILURE',
-                    message: 'Failed to highlight student',
-                    error
-                }));
-            });
-    };
-};
-
 export const copyRoster = (copyFromId, copyToId) => {
     return (dispatch) => {
         db
@@ -197,6 +172,25 @@ export const getStudentsBySection = (sectionId) => {
     };
 };
 
+export const highlightStudent = (studentId, sectionId, color) => {
+    return (dispatch) => {
+        const objPath = `sections.${sectionId}.highlight`;
+        db
+            .collection('students')
+            .doc(studentId)
+            .update({
+                [objPath]: color
+            })
+            .catch(error => {
+                dispatch(setNotification({
+                    type: 'FAILURE',
+                    message: 'Failed to highlight student',
+                    error
+                }));
+            });
+    };
+};
+
 export const removeStudentFromSection = (studentId, sectionId) => {
     return (dispatch) => {
         const section = `sections.${sectionId}`;
@@ -233,6 +227,10 @@ export const setAttendance = (sectionId, attendanceArray) => {
         });
     };
 };
+
+export const unhighlightStudent = (studentId, sectionId) => {
+    return highlightStudent(studentId, sectionId, '');
+}
 
 export const updateStudentInfo = (id, name, gender) => {
     return (dispatch) => {
