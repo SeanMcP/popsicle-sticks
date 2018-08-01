@@ -1,0 +1,33 @@
+.menu {
+    position: relative;
+}
+
+.menu.open
+.icon {
+    color: var(--blue500);
+}
+
+.menu
+.options {
+    background: white;
+    box-shadow: var(--drop-shadow);
+    border: var(--border-white);
+    border-radius: var(--border-radius);
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 2;
+}
+
+.menu
+.options
+.option {
+    cursor: pointer;
+    padding: 1rem;
+}
+
+.menu
+.options
+.option:hover {
+    background: var(--blue50);
+}

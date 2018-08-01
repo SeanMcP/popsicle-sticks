@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Gender from '../common/Gender';
 import Icon from '../atomic/Icon';
+import Menu from '../atomic/Menu';
 import SelectLevel from '../common/SelectLevel';
 
 const StudentRow = (props) => (
@@ -20,7 +21,11 @@ const StudentRow = (props) => (
             />
         </div>
         <div className="buttons">
-            <Icon handleClick={props.handleHighlight} icon="fas fa-highlighter"/>
+            <Menu
+                icon="fas fa-highlighter"
+                options={[{ action: props.handleHighlight, display: 'Yellow' }]}
+            />
+            {/* <Icon handleClick={props.handleHighlight} icon="fas fa-highlighter"/> */}
             <div className="faux-link" onClick={() => props.handleRemove(props.id)}>
                 Remove
             </div>

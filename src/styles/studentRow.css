@@ -14,3 +14,10 @@ span.gender,
 span.gender {
     margin-left: 0.5rem;
 }
+
+.student-row
+.buttons {
+    display: grid;
+    grid-gap: 0.5rem;
+    grid-template-columns: min-content min-content;
+}

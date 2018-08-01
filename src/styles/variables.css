@@ -20,6 +20,7 @@
     --dark-purple:  var(--purple900);
 
     --shadow:       0 0 0.125rem rgba(0, 0, 0, 0.125);
+    --drop-shadow:  0 0.125rem 0.125rem rgba(0, 0, 0, 0.25);
     --dark-shadow:  0 0 0.25rem rgba(0, 0, 0, 0.25);
 
     --an-md:        200ms ease-in-out;
