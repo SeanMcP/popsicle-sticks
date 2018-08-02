@@ -33,16 +33,3 @@
 .option:hover {
     background: var(--blue50);
 }
-
-.menu
-.color-bubble {
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 1rem;
-    height: 0.75rem;
-    margin-right: 0.5rem;
-    width: 0.75rem;
-}
-
-.menu .color-bubble.yellow { background: var(--yellowA400) }
-.menu .color-bubble.orange { background: var(--amberA700) }
-.menu .color-bubble.pink { background: var(--pinkA100) }

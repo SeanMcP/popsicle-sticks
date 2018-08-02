@@ -1,0 +1,17 @@
+.menu
+.color-bubble {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 1rem;
+    height: 0.75rem;
+    margin-right: 0.5rem;
+    width: 0.75rem;
+}
+
+.menu .color-bubble.yellow,
+.highlighted.yellow {background: var(--yellowA400) !important }
+
+.menu .color-bubble.orange,
+.highlighted.orange { background: var(--orangeA200) !important }
+
+.menu .color-bubble.pink,
+.highlighted.pink { background: var(--pink100) !important }

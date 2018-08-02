@@ -7,7 +7,9 @@ const SectionRow = (props) => (
     <div className="section-row">
         <div className="name">
             <Link to={`/section/${props.id}`}>
-                {props.name}
+                <span className={props.highlight ? `highlighted ${props.highlight}` : ''}>
+                    {props.name}
+                </span>
             </Link>
         </div>
         <div className="level">

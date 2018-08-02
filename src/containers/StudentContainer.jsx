@@ -63,6 +63,7 @@ class StudentContainer extends Component {
                         <SectionRow
                             handleChange={this.updateStudentLevel}
                             handleRemove={this.removeStudent}
+                            highlight={sections[sectionId].highlight}
                             id={sectionId}
                             key={sectionId}
                             level={sections[sectionId].current_level}

@@ -8,9 +8,11 @@ import SelectLevel from '../common/SelectLevel';
 const StudentRow = (props) => {
     return (
         <div className="student-row">
-            <div className="name" style={{ backgroundColor: props.highlight ? props.highlight : '' }}>
+            <div className="name">
                 <Link to={`/student/${props.id}`}>
-                    {props.name}
+                    <span className={props.highlight ? `highlighted ${props.highlight}` : ''}>
+                        {props.name}
+                    </span>
                 </Link>
                 <Gender type={props.gender} />
             </div>

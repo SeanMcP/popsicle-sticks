@@ -111,7 +111,7 @@ class SectionContainer extends Component {
         if (ObjVal(students)) {
             for (const id in students) {
                 const student = students[id];
-                const currentSection =student.sections[sectionId];
+                const currentSection = student.sections[sectionId];
                 rows.push(
                     <StudentRow
                         gender={student.gender}
