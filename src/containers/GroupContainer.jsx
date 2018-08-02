@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '../components/atomic/Button';
 import FullScreen from '../components/common/FullScreen';
+import GroupBlock from '../components/group/GroupBlock';
 import Icon from '../components/atomic/Icon';
+import StudentCard from '../components/group/StudentCard';
 import {
     getStudentsBySection
 } from '../actions';
@@ -22,7 +24,7 @@ class GroupContainer extends Component {
             level: 'random',
             sectionIndex: null,
             size: 4,
-            studentId: '',
+            studentId: null,
         }
     }
 
@@ -154,31 +156,30 @@ class GroupContainer extends Component {
 
     renderGroups = () => {
         const { groups } = this.state;
-        const { students } = this.props;
+        const { match : { params: { sectionId } }, students } = this.props;
 
         if (groups.length) {
             const groupList = groups.map((group, i) => {
                 const studentList = group.map((studentId, j) => (
-                    <div
-                        className={`student ${students[studentId].gender} ${studentId === this.state.studentId ? 'selected' : ''}`}
-                        onClick={this.selectStudent(i, studentId)}
+                    <StudentCard
+                        gender={students[studentId].gender}
+                        handleClick={this.selectStudent(i, studentId)}
+                        highlight={students[studentId].sections[sectionId].highlight}
                         key={`${i}-${j}`}
-                    >
-                        {students[studentId].name}
-                    </div>
+                        name={students[studentId].name}
+                        selected={studentId === this.state.studentId}
+                    />
                 ));
 
                 return (
-                    <div
-                        className={`group-block ${this.state.studentId && this.state.sectionIndex !== i ? 'click' : ''}`}
+                    <GroupBlock
+                        clickable={this.state.studentId !== null && this.state.sectionIndex !== i}
+                        handleClick={this.moveStudentToSection(i)}
                         key={`group-${i + 1}`}
-                        onClick={this.moveStudentToSection(i)}
+                        number={i + 1}
                     >
-                        <h4>Group {i + 1}</h4>
-                        <div className="group">
-                            {studentList}
-                        </div>
-                    </div>
+                        {studentList}
+                    </GroupBlock>
                 );
             });
 
