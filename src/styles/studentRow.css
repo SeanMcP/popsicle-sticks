@@ -15,8 +15,11 @@ span.gender {
     margin-left: 0.5rem;
 }
 
+.section-row
+.buttons,
 .student-row
 .buttons {
+    align-items: center;
     display: grid;
     grid-gap: 0.5rem;
     grid-template-columns: min-content min-content;

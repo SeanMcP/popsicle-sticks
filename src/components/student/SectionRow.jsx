@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import MenuHighlight from '../common/MenuHighlight';
 import SelectLevel from '../common/SelectLevel';
 
 const SectionRow = (props) => (
@@ -19,6 +20,7 @@ const SectionRow = (props) => (
             />
         </div>
         <div className="buttons">
+            <MenuHighlight sectionId={props.id} studentId={props.studentId} />
             <div className="faux-link" onClick={() => props.handleRemove(props.id)}>
                 Remove
             </div>
@@ -31,7 +33,8 @@ SectionRow.propTypes = {
     handleRemove: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,
     level: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    studentId: PropTypes.string.isRequired
 };
 
 export default SectionRow;

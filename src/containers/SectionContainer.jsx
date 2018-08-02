@@ -122,6 +122,7 @@ class SectionContainer extends Component {
                         key={id}
                         level={currentSection.current_level}
                         name={student.name}
+                        sectionId={sectionId}
                     />
                 );
             }

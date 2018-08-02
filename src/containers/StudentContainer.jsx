@@ -68,6 +68,7 @@ class StudentContainer extends Component {
                             key={sectionId}
                             level={sections[sectionId].current_level}
                             name={section.name}
+                            studentId={this.props.match.params.studentId}
                         />
                     );
                 }

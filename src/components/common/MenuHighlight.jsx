@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import Menu from '../atomic/Menu';
 import { highlightStudent } from '../../actions';
 import { Capitalize } from '../../utils';
@@ -17,7 +16,8 @@ const MenuHighlight = (props) => {
                 </Fragment>
             ),
             action: () => props.highlightStudent(
-                props.studentId, props.match.params.sectionId,
+                props.studentId,
+                props.sectionId,
                 color === 'none' ? '' : color
             )
         }))
@@ -31,6 +31,7 @@ const MenuHighlight = (props) => {
 }
 
 MenuHighlight.propTypes = {
+    sectionid: PropTypes.string.isRequired,
     studentId: PropTypes.string.isRequired
 }
 
@@ -38,6 +39,4 @@ const mapDispatchToProps = {
     highlightStudent
 }
 
-export default withRouter(
-    connect(null, mapDispatchToProps)(MenuHighlight)
-);
+export default connect(null, mapDispatchToProps)(MenuHighlight);

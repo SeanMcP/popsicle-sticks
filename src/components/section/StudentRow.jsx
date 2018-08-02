@@ -23,7 +23,7 @@ const StudentRow = (props) => {
                 />
             </div>
             <div className="buttons">
-                <MenuHighlight studentId={props.id} />
+                <MenuHighlight sectionId={props.sectionId} studentId={props.id} />
                 <div className="faux-link" onClick={() => props.handleRemove(props.id)}>
                     Remove
                 </div>
@@ -38,7 +38,8 @@ StudentRow.propTypes = {
     handleRemove: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,
     level: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    sectionId: PropTypes.string.isRequired
 };
 
 export default StudentRow;
