@@ -18,6 +18,7 @@ import reducer from './reducers';
 
 import App from './components/App';
 import GroupContainer from './containers/GroupContainer';
+import LoginContainer from './containers/LoginContainer';
 import RandomContainer from './containers/RandomContainer';
 import SectionContainer from './containers/SectionContainer';
 import ScheduleContainer from './containers/ScheduleContainer';
@@ -47,6 +48,7 @@ ReactDOM.render(
                         <Route path={PATH.random} component={RandomContainer}/>
                         <Route path={PATH.section} component={SectionContainer}/>
                         <Route path={PATH.student} component={StudentContainer}/>
+                        <Route path={PATH.login} component={LoginContainer}/>
                         <Route exact path={PATH.schedule} component={ScheduleContainer}/>
                     </Switch>
                 </App>

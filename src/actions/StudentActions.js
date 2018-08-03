@@ -1,6 +1,6 @@
 // StudentActions.js
 import { push } from 'connected-react-router';
-import db from '../firebase';
+import { db } from '../firebase';
 import { setNotification } from '../actions';
 import { PATH } from '../constants';
 
