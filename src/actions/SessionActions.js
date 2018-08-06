@@ -5,7 +5,7 @@ export const SESSION_ACTIONS = {
     SET_USER: 'SET_USER',
 };
 
-export const autheticateUser = (user) => {
+export const authenticateUser = (user) => {
     return (dispatch) => {
         dispatch({
             type: SESSION_ACTIONS.AUTHENTICATE
