@@ -3,7 +3,7 @@ export const PATH = {
     'login': '/login',
     'privacy': '/about/privacy',
     'random': '/section/:sectionId/random',
-    'schedule': '/',
+    'schedule': '/schedule',
     'section': '/section/:sectionId',
     'student': '/student/:studentId',
     'terms': '/about/terms'

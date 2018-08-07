@@ -11,6 +11,7 @@ import {
     setModal,
     updateStudentLevel
 } from '../actions';
+import { PATH } from '../constants';
 
 class StudentContainer extends Component {
     constructor(props) {
@@ -30,7 +31,7 @@ class StudentContainer extends Component {
                 heading={this.renderTitle()}
             >
                 <div className="student-container container">
-                    <Link to="/">Back</Link>
+                    <Link to={PATH.schedule}>Back</Link>
                     {this.renderLevels()}
                 </div>
             </WithHeroLayout>

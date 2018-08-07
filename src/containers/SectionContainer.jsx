@@ -13,6 +13,7 @@ import {
     setModal,
     updateStudentLevel
 } from '../actions';
+import { PATH } from '../constants';
 import { ObjVal } from '../utils';
 
 class SectionContainer extends Component {
@@ -32,7 +33,7 @@ class SectionContainer extends Component {
                 heading={this.renderTitle()}
             >
                 <div className="section container">
-                    <Link to="/">Back</Link>
+                    <Link to={PATH.schedule}>Back</Link>
                     <div className="tools">
                         <Button handleClick={this.openAttendance('random')}>
                             Random Student Picker

@@ -49,7 +49,7 @@ ReactDOM.render(
                         <Route path={PATH.section} component={SectionContainer}/>
                         <Route path={PATH.student} component={StudentContainer}/>
                         <Route path={PATH.login} component={LoginContainer}/>
-                        <Route exact path={PATH.schedule} component={ScheduleContainer}/>
+                        <Route path={PATH.schedule} component={ScheduleContainer}/>
                     </Switch>
                 </App>
             </ConnectedRouter>
