@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import withAuthentication from '../hoc/withAuthentication';
 import Button from '../components/atomic/Button';
 import Icon from '../components/atomic/Icon';
-// import SectionCreator from '../components/schedule/SectionCreator';
 import { getSections, setModal } from '../actions';
 
 class ScheduleContainer extends Component {
@@ -64,6 +62,4 @@ const mapDispatchToProps = {
     setModal
 }
 
-export default withAuthentication(
-    connect(mapStateToProps, mapDispatchToProps)(ScheduleContainer)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(ScheduleContainer);
