@@ -7,6 +7,7 @@ import {
     ConnectedRouter,
     routerMiddleware
 } from 'connected-react-router';
+import PrivateRoute from './components/routing/PrivateRoute';
 import registerServiceWorker from './registerServiceWorker';
 
 // Redux imports
@@ -49,7 +50,7 @@ ReactDOM.render(
                         <Route path={PATH.section} component={SectionContainer}/>
                         <Route path={PATH.student} component={StudentContainer}/>
                         <Route path={PATH.login} component={LoginContainer}/>
-                        <Route path={PATH.schedule} component={ScheduleContainer}/>
+                        <PrivateRoute exact path={PATH.schedule} component={ScheduleContainer}/>
                     </Switch>
                 </App>
             </ConnectedRouter>

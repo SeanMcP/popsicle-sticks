@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
-import { authenticateUser } from '../actions';
+import { authenticateUser } from '../../actions';
 
-const withAuthentication = (Component) => {
+const withAuthentication = (ChildComponent) => {
     class withAuthentication extends Component {
         componentDidMount() {
             firebase.auth().onAuthStateChanged((user) => {
@@ -33,7 +33,7 @@ const withAuthentication = (Component) => {
 
         render() {
             return (
-                <Component
+                <ChildComponent
                     authenticated={this.props.authenticated}
                     user={this.props.user}
                 />
