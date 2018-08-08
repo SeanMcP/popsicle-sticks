@@ -4,18 +4,19 @@ import Button from '../components/atomic/Button';
 import Input from '../components/atomic/Input';
 import { PATH } from '../constants';
 
-class LoginContainerScratch extends Component {
+class SignupContainer extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            confirmation: '',
             email: '',
             password: ''
         }
     }
     render() {
         return (
-            <div className="login container">
+            <div className="signup container">
                 <h1>Sign up</h1>
                 <Input
                     handleChange={this.handleInput}
@@ -29,13 +30,19 @@ class LoginContainerScratch extends Component {
                     name="password"
                     type="password"
                 />
+                <Input
+                    handleChange={this.handleInput}
+                    label="Confirm password"
+                    name="confirmation"
+                    type="password"
+                />
                 <Button
                     className="full"
-                    disabled={!(this.state.email && this.state.password)}
+                    disabled={!(this.state.email && this.state.password && this.state.password === this.state.confirmation)}
                 >
-                    Login
+                    Sign up
                 </Button>
-                <p>Need an account? <Link to={PATH.signup}>Sign up!</Link></p>
+                <p>Already have an account? <Link to={PATH.login}>Login!</Link></p>
             </div>
         )
     }
@@ -45,4 +52,4 @@ class LoginContainerScratch extends Component {
     }
 }
 
-export default LoginContainerScratch;
+export default SignupContainer;

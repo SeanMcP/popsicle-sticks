@@ -24,6 +24,7 @@ import LoginContainerScratch from './containers/LoginContainerScratch';
 import RandomContainer from './containers/RandomContainer';
 import SectionContainer from './containers/SectionContainer';
 import ScheduleContainer from './containers/ScheduleContainer';
+import SignupContainer from './containers/SignupContainer';
 import StudentContainer from './containers/StudentContainer';
 
 import './styles/_styles.css';
@@ -51,6 +52,7 @@ ReactDOM.render(
                         <Route path={PATH.section} component={SectionContainer}/>
                         <Route path={PATH.student} component={StudentContainer}/>
                         <Route path={PATH.login} component={LoginContainerScratch}/>
+                        <Route path={PATH.signup} component={SignupContainer}/>
                         <Route exact path={PATH.schedule} component={ScheduleContainer}/>
                     </Switch>
                 </App>
