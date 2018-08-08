@@ -7,7 +7,7 @@ import {
     ConnectedRouter,
     routerMiddleware
 } from 'connected-react-router';
-import PrivateRoute from './components/routing/PrivateRoute';
+// import PrivateRoute from './components/routing/PrivateRoute';
 import registerServiceWorker from './registerServiceWorker';
 
 // Redux imports
@@ -19,7 +19,8 @@ import reducer from './reducers';
 
 import App from './components/App';
 import GroupContainer from './containers/GroupContainer';
-import LoginContainer from './containers/LoginContainer';
+// import LoginContainer from './containers/LoginContainer';
+import LoginContainerScratch from './containers/LoginContainerScratch';
 import RandomContainer from './containers/RandomContainer';
 import SectionContainer from './containers/SectionContainer';
 import ScheduleContainer from './containers/ScheduleContainer';
@@ -49,8 +50,8 @@ ReactDOM.render(
                         <Route path={PATH.random} component={RandomContainer}/>
                         <Route path={PATH.section} component={SectionContainer}/>
                         <Route path={PATH.student} component={StudentContainer}/>
-                        <Route path={PATH.login} component={LoginContainer}/>
-                        <PrivateRoute exact path={PATH.schedule} component={ScheduleContainer}/>
+                        <Route path={PATH.login} component={LoginContainerScratch}/>
+                        <Route exact path={PATH.schedule} component={ScheduleContainer}/>
                     </Switch>
                 </App>
             </ConnectedRouter>
