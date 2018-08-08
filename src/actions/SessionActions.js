@@ -1,4 +1,5 @@
 // SessionActions.js
+import { auth } from '../firebase';
 
 export const SESSION_ACTIONS = {
     AUTHENTICATE: 'AUTHENTICATE',
@@ -15,4 +16,19 @@ export const authenticateUser = (user) => {
             data: user
         });
     }
-} 
+}
+
+export const userCreateWithEmailAndPassword = (email, password) =>
+    auth.createUserWithEmailAndPassword(email, password);
+
+export const userPasswordReset = (email) =>
+    auth.sendPasswordResetEmail(email);
+
+export const userPasswordUpdate = (password) =>
+    auth.currentUser.updatePassword(password);
+
+export const userSignInWithEmailAndPassword = (email, password) =>
+    auth.signInWithEmailAndPassword(email, password);
+
+export const userSignOut = () =>
+    auth.signOut();
