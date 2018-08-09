@@ -7,7 +7,7 @@ import {
     ConnectedRouter,
     routerMiddleware
 } from 'connected-react-router';
-// import PrivateRoute from './components/routing/PrivateRoute';
+import PrivateRoute from './components/routing/PrivateRoute';
 import registerServiceWorker from './registerServiceWorker';
 
 // Redux imports
@@ -55,7 +55,7 @@ ReactDOM.render(
                         <Route path={PATH.login} component={LoginContainerScratch}/>
                         <Route path={PATH.signup} component={SignupContainer}/>
                         <Route path={PATH.auth} component={AuthenticationContainer}/>
-                        <Route exact path={PATH.schedule} component={ScheduleContainer}/>
+                        <PrivateRoute exact path={PATH.schedule} component={ScheduleContainer}/>
                     </Switch>
                 </App>
             </ConnectedRouter>

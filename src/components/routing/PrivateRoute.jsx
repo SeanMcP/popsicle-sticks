@@ -8,8 +8,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     return (
         <Route {...rest} render={
             (props) => {
-                console.log(rest);
-                console.log(rest.authenticated ? 'auth' : 'no auth')
                 return (
                     rest.authenticated
                         ? (
