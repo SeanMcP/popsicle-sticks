@@ -1,8 +1,16 @@
 // SessionActions.js
-import { push } from 'connected-react-router';
-import { auth } from '../firebase';
-import { setNotification } from '../actions';
-import { PATH } from '../constants';
+import {
+    push
+} from 'connected-react-router';
+import {
+    auth
+} from '../firebase';
+import {
+    setNotification
+} from '../actions';
+import {
+    PATH
+} from '../constants';
 
 export const SESSION_ACTIONS = {
     AUTHENTICATE: 'AUTHENTICATE',
@@ -43,8 +51,34 @@ export const userPasswordReset = (email) =>
 export const userPasswordUpdate = (password) =>
     auth.currentUser.updatePassword(password);
 
-export const userSignInWithEmailAndPassword = (email, password) =>
-    auth.signInWithEmailAndPassword(email, password);
+export const userSignInWithEmailAndPassword = (email, password) => {
+    return (dispatch) => {
+        auth.signInWithEmailAndPassword(email, password)
+            .then(() => {
+                dispatch(push(PATH.auth));
+            })
+            .catch((error) => {
+                dispatch(setNotification({
+                    type: 'FAILURE',
+                    message: error.message,
+                    error
+                }));
+            });
+    }
+}
 
-export const userSignOut = () =>
-    auth.signOut();
+export const userSignOut = () => {
+    return (dispatch) => {
+        auth.signOut()
+            .then(() => {
+                dispatch(push(PATH.home));
+            })
+            .catch((error) => {
+                dispatch(setNotification({
+                    type: 'FAILURE',
+                    message: error.message,
+                    error
+                }));
+            });;
+    }
+}
