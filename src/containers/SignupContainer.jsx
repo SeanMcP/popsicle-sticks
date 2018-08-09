@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Button from '../components/atomic/Button';
 import Input from '../components/atomic/Input';
+import {
+    userCreateWithEmailAndPassword
+} from '../actions';
 import { PATH } from '../constants';
 
 class SignupContainer extends Component {
@@ -14,6 +18,7 @@ class SignupContainer extends Component {
             password: ''
         }
     }
+
     render() {
         return (
             <div className="signup container">
@@ -39,6 +44,7 @@ class SignupContainer extends Component {
                 <Button
                     className="full"
                     disabled={!(this.state.email && this.state.password && this.state.password === this.state.confirmation)}
+                    handleClick={this.handleCreate}
                 >
                     Sign up
                 </Button>
@@ -47,9 +53,20 @@ class SignupContainer extends Component {
         )
     }
 
+    handleCreate = () => {
+        this.props.userCreateWithEmailAndPassword(
+            this.state.email,
+            this.state.password
+        );
+    }
+
     handleInput = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     }
 }
 
-export default SignupContainer;
+const mapDispatchToProps = {
+    userCreateWithEmailAndPassword
+}
+
+export default connect(null, mapDispatchToProps)(SignupContainer);

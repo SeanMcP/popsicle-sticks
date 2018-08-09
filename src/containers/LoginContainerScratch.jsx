@@ -16,7 +16,7 @@ class LoginContainerScratch extends Component {
     render() {
         return (
             <div className="login container">
-                <h1>Sign up</h1>
+                <h1>Login</h1>
                 <Input
                     handleChange={this.handleInput}
                     label="Email address"
