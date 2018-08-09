@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '../components/atomic/Button';
 import Input from '../components/atomic/Input';
+import {
+    userSignInWithEmailAndPassword
+} from '../actions';
 import { PATH } from '../constants';
 
 class LoginContainerScratch extends Component {
@@ -32,6 +36,7 @@ class LoginContainerScratch extends Component {
                 <Button
                     className="full"
                     disabled={!(this.state.email && this.state.password)}
+                    handleClick={this.handleLogin}
                 >
                     Login
                 </Button>
@@ -43,6 +48,17 @@ class LoginContainerScratch extends Component {
     handleInput = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     }
+
+    handleLogin = () => {
+        this.props.userSignInWithEmailAndPassword(
+            this.state.email,
+            this.state.password
+        );
+    }
 }
 
-export default LoginContainerScratch;
+const mapDispatchToProps = {
+    userSignInWithEmailAndPassword
+}
+
+export default connect(null, mapDispatchToProps)(LoginContainerScratch);
