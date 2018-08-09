@@ -15,6 +15,7 @@ import {
 export const SESSION_ACTIONS = {
     AUTHENTICATE: 'AUTHENTICATE',
     SET_USER: 'SET_USER',
+    SIGN_OUT: 'SIGN_OUT',
 };
 
 export const authenticateUser = (user) => {
@@ -71,6 +72,9 @@ export const userSignOut = () => {
     return (dispatch) => {
         auth.signOut()
             .then(() => {
+                dispatch({
+                    type: SESSION_ACTIONS.SIGN_OUT
+                });
                 dispatch(push(PATH.home));
             })
             .catch((error) => {
