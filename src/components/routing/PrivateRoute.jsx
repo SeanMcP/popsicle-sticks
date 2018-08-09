@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import withAuthentication from './withAuthentication';
 import { PATH } from '../../constants';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    // console.log('rest', rest);
     return (
         <Route {...rest} render={
             (props) => {
