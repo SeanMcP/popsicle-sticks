@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 import { PATH } from '../../constants';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
+    const isAuthenticated = localStorage.getItem('userAuth');
     return (
         <Route {...rest} render={
             (props) => {
                 return (
-                    rest.authenticated
+                    isAuthenticated
                         ? (
                             <Component
                                 {...props}

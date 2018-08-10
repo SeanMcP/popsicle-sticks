@@ -20,6 +20,9 @@ export const SESSION_ACTIONS = {
 
 export const authenticateUser = (user) => {
     return (dispatch) => {
+        localStorage.setItem('userAuth', true);
+        localStorage.setItem('userEmail', user.email);
+        localStorage.setItem('userUid', user.uid);
         dispatch({
             type: SESSION_ACTIONS.AUTHENTICATE
         });
@@ -75,7 +78,11 @@ export const userSignOut = () => {
                 dispatch({
                     type: SESSION_ACTIONS.SIGN_OUT
                 });
-                dispatch(push(PATH.home));
+                localStorage.removeItem('userAuth');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userUid');
+                localStorage.getItem('userAuth');
+                dispatch(push(PATH.root));
             })
             .catch((error) => {
                 dispatch(setNotification({

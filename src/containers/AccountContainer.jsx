@@ -11,6 +11,8 @@ class AccountContainer extends Component {
                 heading="Account"
             >
                 <div className="container account">
+                    <h2>Details</h2>
+                    <p><b>Email address:</b> {this.props.user.email}</p>
                 </div>
             </WithHeroLayout>
         );
@@ -21,6 +23,11 @@ const mapDispatchToProps = {
     userPasswordUpdate
 }
 
+const mapStateToProps = (state) => ({
+    authenticated: state.session.authenticated,
+    user: state.session.user
+});
+
 AccountContainer.propTypes = {
     authenticated: PropTypes.bool.isRequired,
     user: PropTypes.shape({
@@ -30,4 +37,4 @@ AccountContainer.propTypes = {
     userPasswordUpdate: PropTypes.func.isRequired
 }
 
-export default connect(null, mapDispatchToProps)(AccountContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountContainer);
