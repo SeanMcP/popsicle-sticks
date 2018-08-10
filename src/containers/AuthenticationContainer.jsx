@@ -1,42 +1,14 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import firebase from 'firebase';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { authenticateUser } from '../actions';
+import withAuth from '../components/hoc/withAuth';
 import { PATH } from '../constants';
 
 class AuthenticationContainer extends Component {
-    componentDidMount() {
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                // User is signed in.
-                const userData = {
-                    displayName: user.displayName,
-                    email: user.email,
-                    photoUrl: user.photoUrl,
-                    uid: user.uid,
-                }
-
-                this.props.authenticateUser(userData);
-                this.props.history.push(PATH.schedule);
-                // var displayName = user.displayName;
-                // var email = user.email;
-                // var emailVerified = user.emailVerified;
-                // var photoURL = user.photoURL;
-                // var uid = user.uid;
-                // var phoneNumber = user.phoneNumber;
-                // var providerData = user.providerData;
-                // user.getIdToken() // accessToken
-            }
-        }, (error) => {
-            console.log(error);
-        });
+    componentDidUpdate() {
+        if (this.props.authenticated)
+            this.props.history.push(PATH.schedule)
     }
-
-    // componentDidUpdate(nextProps) {
-    //     if (nextProps.authenticated)
-    //         nextProps.history.push(PATH.schedule)
-    // }
 
     render() {
         return (
@@ -48,14 +20,13 @@ class AuthenticationContainer extends Component {
     }
 }
 
-const mapDispatchToProps = {
-    authenticateUser
+AuthenticationContainer.propTypes = {
+    authenticated: PropTypes.bool.isRequired,
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired
+    })
 }
 
-const mapStateToProps = (state) => ({
-    authenticated: state.session.authenticated
-});
-
-export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(AuthenticationContainer)
+export default withAuth(
+    withRouter(AuthenticationContainer)
 );
