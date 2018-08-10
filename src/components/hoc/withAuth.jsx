@@ -16,24 +16,18 @@ const withAuth = (ChildComponent) => {
                     }
 
                     this.props.authenticateUser(userData);
-                    // var displayName = user.displayName;
-                    // var email = user.email;
-                    // var emailVerified = user.emailVerified;
-                    // var photoURL = user.photoURL;
-                    // var uid = user.uid;
-                    // var phoneNumber = user.phoneNumber;
-                    // var providerData = user.providerData;
-                    // user.getIdToken() // accessToken
                 }
             }, (error) => {
                 console.log(error);
             });
         }
         render() {
+            const { authenticated, authenticateUser, user, ...rest } = this.props;
             return (
                 <ChildComponent
-                    authenticated={this.props.authenticated}
-                    user={this.props.user}
+                    authenticated={authenticated}
+                    user={user}
+                    {...rest}
                 />
             );
         }

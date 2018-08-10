@@ -1,15 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from './layout/Header';
 import Modal from './common/Modal';
 import Toast from './common/Toast';
+import withAuth from './hoc/withAuth';
 
-const App = ({ children }) => (
+const App = (props) => (
     <div className="app-container">
         <Header/>
-        {children}
+        {props.children}
         <Modal/>
         <Toast/>
     </div>
 );
 
-export default App;
+App.propTypes = {
+    authenticated: PropTypes.bool.isRequired,
+}
+
+export default withAuth(App);
