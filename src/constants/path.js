@@ -1,4 +1,5 @@
 export const PATH = {
+    account: '/account',
     auth: '/auth',
     group: '/section/:sectionId/group',
     login: '/login',

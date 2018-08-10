@@ -18,6 +18,7 @@ import logger from 'redux-logger'
 import reducer from './reducers';
 
 import App from './components/App';
+import AccountContainer from './containers/AccountContainer';
 import AuthenticationContainer from './containers/AuthenticationContainer';
 import GroupContainer from './containers/GroupContainer';
 // import LoginContainer from './containers/LoginContainer';
@@ -55,6 +56,7 @@ ReactDOM.render(
                         <Route path={PATH.login} component={LoginContainerScratch}/>
                         <Route path={PATH.signup} component={SignupContainer}/>
                         <Route path={PATH.auth} component={AuthenticationContainer}/>
+                        <PrivateRoute exact path={PATH.account} component={AccountContainer}/>
                         <PrivateRoute exact path={PATH.schedule} component={ScheduleContainer}/>
                     </Switch>
                 </App>

@@ -2,9 +2,13 @@
     align-items: center;
     background: var(--blue600);
     display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: 1fr min-content;
+    grid-template-columns: 1fr min-content min-content;
     color: white;
     font-size: 1.25rem;
     padding: 1rem;
+}
+
+.app-header a,
+.app-header a:hover {
+    color: white;
 }
