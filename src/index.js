@@ -23,6 +23,7 @@ import AuthenticationContainer from './containers/AuthenticationContainer';
 import GroupContainer from './containers/GroupContainer';
 // import LoginContainer from './containers/LoginContainer';
 import LoginContainerScratch from './containers/LoginContainerScratch';
+import HomeContainer from './containers/HomeContainer';
 import RandomContainer from './containers/RandomContainer';
 import SectionContainer from './containers/SectionContainer';
 import ScheduleContainer from './containers/ScheduleContainer';
@@ -56,8 +57,9 @@ ReactDOM.render(
                         <Route path={PATH.login} component={LoginContainerScratch}/>
                         <Route path={PATH.signup} component={SignupContainer}/>
                         <Route path={PATH.auth} component={AuthenticationContainer}/>
-                        <PrivateRoute exact path={PATH.account} component={AccountContainer}/>
+                        <Route exact path={PATH.account} component={AccountContainer}/>
                         <PrivateRoute exact path={PATH.schedule} component={ScheduleContainer}/>
+                        <Route exact path={PATH.root} component={HomeContainer}/>
                     </Switch>
                 </App>
             </ConnectedRouter>

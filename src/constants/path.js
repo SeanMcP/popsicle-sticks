@@ -5,6 +5,7 @@ export const PATH = {
     login: '/login',
     privacy: '/about/privacy',
     random: '/section/:sectionId/random',
+    root: '/',
     schedule: '/schedule',
     section: '/section/:sectionId',
     signup: '/signup',
